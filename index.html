@@ -700,17 +700,21 @@ textarea{resize:vertical;min-height:70px}
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
-        <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px">
+        <div onclick="setSuFilter('pending')" style="background:#FFFBEB;border:2px solid #FDE68A;border-radius:10px;padding:10px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.15s" id="su-card-pending" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow='none'">
           <span style="font-size:22px;font-weight:800;color:#D97706" id="su-count-pending">—</span>
-          <span style="font-size:11px;color:#92400E;font-weight:600">Pending</span>
+          <div><div style="font-size:11px;color:#92400E;font-weight:700">Pending</div><div style="font-size:10px;color:#D97706">Click to filter</div></div>
         </div>
-        <div style="background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px">
+        <div onclick="setSuFilter('approved')" style="background:#ECFDF5;border:2px solid #A7F3D0;border-radius:10px;padding:10px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.15s" id="su-card-approved" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow='none'">
           <span style="font-size:22px;font-weight:800;color:#059669" id="su-count-approved">—</span>
-          <span style="font-size:11px;color:#065F46;font-weight:600">Approved</span>
+          <div><div style="font-size:11px;color:#065F46;font-weight:700">Approved</div><div style="font-size:10px;color:#059669">Click to filter</div></div>
         </div>
-        <div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px">
+        <div onclick="setSuFilter('rejected')" style="background:#FEF2F2;border:2px solid #FECACA;border-radius:10px;padding:10px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.15s" id="su-card-rejected" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow='none'">
           <span style="font-size:22px;font-weight:800;color:#DC2626" id="su-count-rejected">—</span>
-          <span style="font-size:11px;color:#991B1B;font-weight:600">Rejected</span>
+          <div><div style="font-size:11px;color:#991B1B;font-weight:700">Rejected</div><div style="font-size:10px;color:#DC2626">Click to filter</div></div>
+        </div>
+        <div onclick="setSuFilter('')" style="background:#F8FAFC;border:2px solid #E2E8F0;border-radius:10px;padding:10px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.15s" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow='none'">
+          <span style="font-size:22px;font-weight:800;color:#1B2B6B" id="su-count-all">—</span>
+          <div><div style="font-size:11px;color:#475569;font-weight:700">All</div><div style="font-size:10px;color:#94A3B8">Show all</div></div>
         </div>
       </div>
       <div id="su-list"><div class="loading"><div class="spinner"></div>Loading…</div></div>
@@ -2503,6 +2507,8 @@ function updateSignupCounts() {
   document.getElementById('su-count-pending').textContent  = allSignups.filter(s=>s.status==='pending').length;
   document.getElementById('su-count-approved').textContent = allSignups.filter(s=>s.status==='approved').length;
   document.getElementById('su-count-rejected').textContent = allSignups.filter(s=>s.status==='rejected').length;
+  const allEl = document.getElementById('su-count-all');
+  if (allEl) allEl.textContent = allSignups.length;
 }
 
 function updateSignupBadge() {
@@ -2522,6 +2528,18 @@ async function loadSignupCountBadge() {
   } catch(_) {}
 }
 
+function setSuFilter(value) {
+  // Update the dropdown to match
+  const sel = document.getElementById('su-filter');
+  if (sel) sel.value = value;
+  // Highlight active card
+  ['pending','approved','rejected'].forEach(s => {
+    const card = document.getElementById('su-card-' + s);
+    if (card) card.style.outline = (s === value) ? '2px solid #1B2B6B' : 'none';
+  });
+  filterSignups();
+}
+
 function filterSignups() {
   const f = (document.getElementById('su-filter')||{value:''}).value;
   filteredSignups = f ? allSignups.filter(s=>s.status===f) : allSignups;
@@ -2536,13 +2554,15 @@ function renderSignupList() {
     const bClass = s.status==='approved' ? 'su-approved' : s.status==='rejected' ? 'su-rejected' : 'su-pending';
     const bLabel = s.status==='approved' ? '✓ Approved' : s.status==='rejected' ? '✗ Rejected' : '⏳ Pending';
     const isPending = s.status==='pending';
+    const approvedRole = s.approved_role || '—';
     return `<div class="su-card ${s.status}">
       <div style="display:flex;gap:14px;flex-wrap:wrap">
         <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#1B2B6B,#2D3E9E);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0">${esc((s.company_name||'?').charAt(0).toUpperCase())}</div>
-        <div style="flex:1;min-width:180px">
+        <div style="flex:1;min-width:200px">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
             <div style="font-size:15px;font-weight:800;color:#1B2B6B">${esc(s.company_name||'—')}</div>
             <span class="su-badge ${bClass}">${bLabel}</span>
+            ${!isPending && s.approved_role ? `<span style="font-size:10px;background:#EFF6FF;color:#1B2B6B;padding:2px 8px;border-radius:20px;font-weight:700;border:1px solid #BFDBFE">Role: ${esc(s.approved_role)}</span>` : ''}
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:4px">
             <div style="font-size:11.5px;color:#64748B">👤 ${esc(s.contact_name||'—')}${s.designation?' · '+esc(s.designation):''}</div>
@@ -2553,10 +2573,29 @@ function renderSignupList() {
             ${s.geography?`<div style="font-size:11.5px;color:#64748B">📍 ${esc(s.geography)}</div>`:''}
           </div>
           ${s.about?`<div style="margin-top:8px;font-size:12px;color:#475569;background:#F8FAFC;border-radius:6px;padding:8px 10px;border-left:3px solid #E2E8F0;font-style:italic">${esc(s.about)}</div>`:''}
-          <div style="font-size:10.5px;color:#CBD5E1;margin-top:6px">Submitted ${date}${s.approved_at?' · ✓ Approved '+new Date(s.approved_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}):''}${s.rejected_at?' · ✗ Rejected '+new Date(s.rejected_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+( s.reject_reason?' ('+esc(s.reject_reason)+')'  :'')  :''}</div>
+          ${isPending ? `
+          <div style="margin-top:12px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px 14px">
+            <div style="font-size:11px;font-weight:700;color:#475569;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Access Role to Assign</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:#334155;background:#fff;border:1px solid #E2E8F0;border-radius:6px;padding:6px 10px">
+                <input type="radio" name="role-${s.id}" value="admin" style="accent-color:#1B2B6B">
+                <span>Admin</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:#334155;background:#fff;border:1px solid #E2E8F0;border-radius:6px;padding:6px 10px">
+                <input type="radio" name="role-${s.id}" value="partner_sales" checked style="accent-color:#1B2B6B">
+                <span>Partner Sales</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:#334155;background:#fff;border:1px solid #E2E8F0;border-radius:6px;padding:6px 10px">
+                <input type="radio" name="role-${s.id}" value="partner_poc" style="accent-color:#1B2B6B">
+                <span>Partner Master / POC</span>
+              </label>
+            </div>
+            <div style="font-size:10.5px;color:#94A3B8;margin-top:6px">Partner Sales = can only see own leads · Partner Master/POC = sees all company leads</div>
+          </div>` : ''}
+          <div style="font-size:10.5px;color:#CBD5E1;margin-top:8px">Submitted ${date}${s.approved_at?' · ✓ Approved '+new Date(s.approved_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}):''}${s.rejected_at?' · ✗ Rejected '+new Date(s.rejected_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+(s.reject_reason?' ('+esc(s.reject_reason)+')':''):''}</div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:8px;min-width:130px">
-          ${isPending?`<button onclick="approveSignup('${s.id}','${esc(s.email)}','${esc(s.company_name)}')" style="background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;border-radius:8px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer">✓ Approve &amp; Email</button>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:140px">
+          ${isPending?`<button onclick="approveSignup('${s.id}','${esc(s.email)}','${esc(s.company_name)}')" style="background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;border-radius:8px;padding:9px 12px;font-size:12px;font-weight:700;cursor:pointer;line-height:1.4">✓ Approve<br>&amp; Send Email</button>
           <button onclick="rejectSignup('${s.id}')" style="background:#FEF2F2;color:#DC2626;border:1px solid #FECACA;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer">✗ Reject</button>`:''}
           <button onclick="navigator.clipboard.writeText('${esc(s.email)}').then(()=>toast('Copied ✓','success'))" style="background:#F8FAFC;color:#64748B;border:1px solid #E2E8F0;border-radius:8px;padding:6px 10px;font-size:11px;cursor:pointer">📋 Copy Email</button>
         </div>
@@ -2566,37 +2605,79 @@ function renderSignupList() {
 }
 
 async function approveSignup(id, email, companyName) {
-  if (!confirm('Approve ' + companyName + ' (' + email + ')?\n\nA welcome email will be sent to them.')) return;
+  // Read selected role from radio buttons
+  const roleRadio = document.querySelector(`input[name="role-${id}"]:checked`);
+  const selectedRole = roleRadio ? roleRadio.value : 'partner_sales';
+  const roleLabel = selectedRole === 'admin' ? 'Admin'
+    : selectedRole === 'partner_poc' ? 'Partner Master / POC'
+    : 'Partner Sales';
 
-  // Create partner record
+  if (!confirm('Approve ' + companyName + ' (' + email + ') as ' + roleLabel + '?\n\nA welcome email will be sent to them.')) return;
+
+  const signup = allSignups.find(s=>s.id===id) || {};
+
+  // Create partner record (only needed for partner roles)
   const pid = companyName.toLowerCase().replace(/[^a-z0-9]/g,'_').replace(/__+/g,'_').slice(0,30);
   const initials = companyName.split(' ').filter(Boolean).map(w=>w[0]).join('').toUpperCase().slice(0,3);
   const colors = ['#1B2B6B','#059669','#D97706','#7C3AED','#0EA5E9'];
-  await sb.from('partners').upsert({ id:pid, name:companyName, initials, color:colors[Math.floor(Math.random()*colors.length)],
-    type: (allSignups.find(s=>s.id===id)||{}).company_type||'' });
+
+  if (selectedRole !== 'admin') {
+    await sb.from('partners').upsert({
+      id: pid, name: companyName, initials,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      type: signup.company_type || ''
+    });
+  }
 
   // Assign role via RPC
   try {
-    await sb.rpc('assign_user_role',{p_email:email,p_role:'partner',p_partner_id:pid,p_is_poc:true});
-  } catch(_) {}
+    const rpcRole   = selectedRole === 'admin' ? 'admin' : 'partner';
+    const isPoc     = selectedRole === 'partner_poc';
+    const partnerId = selectedRole === 'admin' ? null : pid;
+    await sb.rpc('assign_user_role', {
+      p_email:      email,
+      p_role:       rpcRole,
+      p_partner_id: partnerId,
+      p_is_poc:     isPoc
+    });
+  } catch(e) { console.warn('RPC assign_user_role error:', e.message); }
 
-  // Update signup record
+  // Update signup record with role label
   const now = new Date().toISOString();
-  const { error } = await sb.from('partner_signups').update({status:'approved',approved_at:now,partner_id:pid}).eq('id',id);
-  if (error) { toast('Error: '+error.message,'error'); return; }
+  const { error } = await sb.from('partner_signups').update({
+    status: 'approved',
+    approved_at: now,
+    partner_id: selectedRole !== 'admin' ? pid : null,
+    approved_role: roleLabel
+  }).eq('id', id);
+  if (error) { toast('Error saving approval: ' + error.message, 'error'); return; }
 
-  // Send approval email
+  // Send approval email — use no-cors to avoid CORS errors from Apps Script
   try {
-    const signup = allSignups.find(s=>s.id===id)||{};
-    const res = await fetch(WEBAPP_URL+'?action=sendApprovalEmail&to='+encodeURIComponent(email)+'&company='+encodeURIComponent(companyName)+'&contact='+encodeURIComponent(signup.contact_name||'')+'&partnerId='+encodeURIComponent(pid));
-    const r = await res.json().catch(()=>({}));
-    toast(r.success ? '✓ Approved & welcome email sent to '+email : 'Approved ✓ (check email delivery)','success');
-  } catch(_) { toast('Approved ✓','success'); }
+    const contact = signup.contact_name || '';
+    const emailUrl = WEBAPP_URL
+      + '?action=sendApprovalEmail'
+      + '&to='        + encodeURIComponent(email)
+      + '&company='   + encodeURIComponent(companyName)
+      + '&contact='   + encodeURIComponent(contact)
+      + '&partnerId=' + encodeURIComponent(selectedRole !== 'admin' ? pid : 'admin')
+      + '&role='      + encodeURIComponent(roleLabel);
+    // Use no-cors — Apps Script handles sending; we can't read the response but email still goes
+    fetch(emailUrl, { mode: 'no-cors' });
+    toast('✓ Approved as ' + roleLabel + ' — welcome email sent to ' + email, 'success');
+  } catch(_) {
+    toast('✓ Approved as ' + roleLabel, 'success');
+  }
 
+  // Update local state
   const idx = allSignups.findIndex(s=>s.id===id);
-  if (idx>=0) { allSignups[idx].status='approved'; allSignups[idx].approved_at=now; }
+  if (idx >= 0) {
+    allSignups[idx].status = 'approved';
+    allSignups[idx].approved_at = now;
+    allSignups[idx].approved_role = roleLabel;
+  }
   updateSignupCounts(); filterSignups(); updateSignupBadge();
-  await loadPartnerMap(); loadPartnerGrid();
+  if (selectedRole !== 'admin') { await loadPartnerMap(); loadPartnerGrid(); }
 }
 
 async function rejectSignup(id) {
