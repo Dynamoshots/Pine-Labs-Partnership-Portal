@@ -1166,6 +1166,8 @@ function showView(id) {
   document.getElementById('view-login').style.display  = (id==='login')  ? 'flex' : 'none';
   document.getElementById('view-admin').style.display  = (id==='admin')  ? 'block': 'none';
   document.getElementById('view-partner').style.display= (id==='partner')? 'block': 'none';
+  const su = document.getElementById('view-signup');
+  if (su) su.style.display = 'none';
 }
 
 // ── AUTH ─────────────────────────────────────────
@@ -2751,12 +2753,7 @@ function showLogin() {
   showView('login');
 }
 
-// Override showView to also hide signup
-const _origShowView = showView;
-function showView(id) {
-  document.getElementById('view-signup').style.display = 'none';
-  _origShowView(id);
-}
+// showView already handles signup hiding — override removed
 
 // ── STEP NAVIGATION ───────────────────────────────
 function spGoStep(n) {
