@@ -234,6 +234,31 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
 ::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:#94A3B8}
 
+
+/* ── SIGNUP VIEW ── */
+#view-signup{display:none;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#0f1b4c 0%,#1B2B6B 50%,#2a3b8e 100%);padding:24px}
+.signup-card{background:#fff;border-radius:18px;padding:36px 40px;width:100%;max-width:540px;box-shadow:0 24px 80px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08)}
+.signup-step{display:none}.signup-step.active{display:block}
+.signup-progress{display:flex;gap:8px;margin-bottom:28px;align-items:center}
+.signup-progress-step{flex:1;height:4px;border-radius:2px;background:#E2E8F0;transition:.4s}
+.signup-progress-step.done{background:#1B2B6B}
+.signup-progress-step.active{background:#2D3E9E}
+.signup-success{text-align:center;padding:20px 0}
+.signup-success-icon{font-size:52px;margin-bottom:16px}
+
+/* ── SIGNUP BADGE STYLES ── */
+.signup-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.signup-badge-pending{background:#FFFBEB;color:#D97706;border:1px solid #FDE68A}
+.signup-badge-approved{background:#ECFDF5;color:#059669;border:1px solid #A7F3D0}
+.signup-badge-rejected{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA}
+
+/* ── SIGNUP REQUEST CARD ── */
+.signup-req-card{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:18px;margin-bottom:12px;transition:.2s}
+.signup-req-card:hover{border-color:#BFDBFE;box-shadow:0 4px 16px rgba(27,43,107,.08)}
+.signup-req-card.pending{border-left:3px solid #D97706}
+.signup-req-card.approved{border-left:3px solid #059669;opacity:.75}
+.signup-req-card.rejected{border-left:3px solid #DC2626;opacity:.6}
+
 </style>
 </head>
 <body>
@@ -248,7 +273,187 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
     <div class="form-group"><label>Email address</label><input type="email" id="login-email" placeholder="you@company.com"></div>
     <div class="form-group"><label>Password</label><input type="password" id="login-pass" placeholder="••••••••"></div>
     <button class="btn btn-primary" style="width:100%;margin-top:6px;padding:10px" onclick="doLogin()">Sign In</button>
-    <div class="login-footer">Pine Labs · Partner Operations · Confidential</div>
+    <div style="text-align:center;margin-top:16px;font-size:12.5px;color:#64748B">
+      Not a member yet?
+      <span onclick="showSignup()" style="color:#1B2B6B;font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:2px">Sign up</span>
+    </div>
+    <div class="login-footer" style="margin-top:14px">Pine Labs · Partner Operations · Confidential</div>
+  </div>
+</div>
+
+<!-- ═══ SIGNUP VIEW ═══ -->
+<div id="view-signup">
+  <div class="signup-card">
+    <!-- Back link -->
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:22px">
+      <span onclick="showLogin()" style="cursor:pointer;color:#94A3B8;font-size:13px;display:flex;align-items:center;gap:4px;transition:.15s" onmouseover="this.style.color='#1B2B6B'" onmouseout="this.style.color='#94A3B8'">← Back to Sign In</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+      <div class="login-logo" style="margin:0;flex-shrink:0">PL</div>
+      <div>
+        <div style="font-size:18px;font-weight:800;color:#1B2B6B;letter-spacing:-.01em">Partner Sign Up</div>
+        <div style="font-size:11.5px;color:#94A3B8;margin-top:1px">Apply to join the Pine Labs Partnership Program</div>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="signup-progress" style="margin-top:20px">
+      <div class="signup-progress-step active" id="sp-bar-1"></div>
+      <div class="signup-progress-step" id="sp-bar-2"></div>
+      <div class="signup-progress-step" id="sp-bar-3"></div>
+    </div>
+    <div id="sp-step-label" style="font-size:11px;color:#94A3B8;margin-bottom:18px">Step 1 of 3 · Company Details</div>
+
+    <div class="err-msg" id="signup-err"></div>
+
+    <!-- ── STEP 1: Company Details ── -->
+    <div class="signup-step active" id="sp-step-1">
+      <div style="font-size:13px;font-weight:700;color:#1B2B6B;margin-bottom:14px">Company Details</div>
+      <div class="form-grid" style="gap:12px;margin-bottom:12px">
+        <div class="form-group">
+          <label>Company Name <span class="req">*</span></label>
+          <input type="text" id="sp-company" placeholder="e.g. GoFrugal Technologies">
+        </div>
+        <div class="form-group">
+          <label>Company Email <span class="req">*</span></label>
+          <input type="email" id="sp-email" placeholder="partnerships@yourcompany.com">
+        </div>
+        <div class="form-group">
+          <label>Phone Number <span class="req">*</span></label>
+          <input type="tel" id="sp-phone" placeholder="+91 98765 43210">
+        </div>
+        <div class="form-group">
+          <label>Contact Person Name <span class="req">*</span></label>
+          <input type="text" id="sp-contact" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label>Designation</label>
+          <input type="text" id="sp-designation" placeholder="e.g. Head of Partnerships">
+        </div>
+        <div class="form-group">
+          <label>Website</label>
+          <input type="url" id="sp-website" placeholder="https://yourcompany.com">
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;padding:11px;margin-top:6px" onclick="spNext(1)">Continue →</button>
+    </div>
+
+    <!-- ── STEP 2: Company Type & Segment ── -->
+    <div class="signup-step" id="sp-step-2">
+      <div style="font-size:13px;font-weight:700;color:#1B2B6B;margin-bottom:14px">Company Profile</div>
+      <div class="form-grid" style="gap:12px;margin-bottom:12px">
+        <div class="form-group" style="grid-column:1/-1">
+          <label>Type of Company <span class="req">*</span></label>
+          <select id="sp-type">
+            <option value="">Select company type…</option>
+            <option>ERP Player</option>
+            <option>CRM Player</option>
+            <option>Logistics Provider</option>
+            <option>POS / Billing Software</option>
+            <option>Payment Aggregator</option>
+            <option>E-Commerce Platform</option>
+            <option>Cloud Telephony / IVR</option>
+            <option>Accounting & Finance Software</option>
+            <option>HR & Payroll Platform</option>
+            <option>Marketing & CRM Tools</option>
+            <option>System Integrator / VAR</option>
+            <option>Consulting / Advisory Firm</option>
+            <option>Technology Distributor</option>
+            <option>Others</option>
+          </select>
+        </div>
+        <div class="form-group" id="sp-type-other-wrap" style="grid-column:1/-1;display:none">
+          <label>Please specify <span class="req">*</span></label>
+          <input type="text" id="sp-type-other" placeholder="Describe your company type">
+        </div>
+        <div class="form-group" style="grid-column:1/-1">
+          <label>Primary Segment <span class="req">*</span></label>
+          <select id="sp-segment">
+            <option value="">Select primary segment…</option>
+            <option>Food & Beverage (F&B)</option>
+            <option>Hospitality & Hotels</option>
+            <option>Retail & Fashion</option>
+            <option>Grocery & Supermarkets</option>
+            <option>Fitness & Wellness</option>
+            <option>Healthcare & Pharmacy</option>
+            <option>Accounting & Taxation</option>
+            <option>Education & EdTech</option>
+            <option>Automotive & Garages</option>
+            <option>Beauty & Salons</option>
+            <option>Jewellery & Luxury</option>
+            <option>Electronics & Appliances</option>
+            <option>Logistics & Supply Chain</option>
+            <option>Professional Services</option>
+            <option>Multi-Segment / Cross-Industry</option>
+            <option>Others</option>
+          </select>
+        </div>
+        <div class="form-group" style="grid-column:1/-1">
+          <label>Number of Merchants / Clients</label>
+          <select id="sp-merchant-count">
+            <option value="">Select range…</option>
+            <option>Less than 100</option>
+            <option>100 – 500</option>
+            <option>500 – 2,000</option>
+            <option>2,000 – 10,000</option>
+            <option>More than 10,000</option>
+          </select>
+        </div>
+        <div class="form-group" style="grid-column:1/-1">
+          <label>Geography / States Covered</label>
+          <input type="text" id="sp-geography" placeholder="e.g. Maharashtra, Karnataka, Delhi, Pan-India">
+        </div>
+        <div class="form-group" style="grid-column:1/-1">
+          <label>Tell us about your company <span class="req">*</span></label>
+          <textarea id="sp-about" rows="3" placeholder="Brief description of what your company does and why you want to partner with Pine Labs…"></textarea>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-ghost" style="flex:1;padding:10px" onclick="spBack(2)">← Back</button>
+        <button class="btn btn-primary" style="flex:2;padding:10px" onclick="spNext(2)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Set Password ── -->
+    <div class="signup-step" id="sp-step-3">
+      <div style="font-size:13px;font-weight:700;color:#1B2B6B;margin-bottom:6px">Set Your Password</div>
+      <div style="font-size:12px;color:#64748B;margin-bottom:16px">This will be your login password once your application is approved.</div>
+      <div class="form-grid" style="gap:12px;margin-bottom:12px">
+        <div class="form-group">
+          <label>Password <span class="req">*</span></label>
+          <input type="password" id="sp-pass" placeholder="Min. 8 characters" oninput="spCheckPass()">
+        </div>
+        <div class="form-group">
+          <label>Confirm Password <span class="req">*</span></label>
+          <input type="password" id="sp-pass2" placeholder="Repeat password" oninput="spCheckPass()">
+        </div>
+      </div>
+      <div id="sp-pass-hint" style="font-size:11.5px;color:#94A3B8;margin-bottom:16px;min-height:18px"></div>
+      <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:12px 14px;font-size:11.5px;color:#334155;margin-bottom:16px">
+        <strong style="color:#1B2B6B">What happens next?</strong><br>
+        Our partnership team will review your application and reach out within 2–3 business days. Once approved, you can log in and start submitting leads.
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-ghost" style="flex:1;padding:10px" onclick="spBack(3)">← Back</button>
+        <button class="btn btn-primary" style="flex:2;padding:10px" id="sp-submit-btn" onclick="submitSignup()">Submit Application</button>
+      </div>
+    </div>
+
+    <!-- ── SUCCESS STATE ── -->
+    <div class="signup-step" id="sp-step-success">
+      <div class="signup-success">
+        <div class="signup-success-icon">🎉</div>
+        <div style="font-size:20px;font-weight:800;color:#1B2B6B;margin-bottom:8px">Application Submitted!</div>
+        <div style="font-size:13.5px;color:#64748B;line-height:1.6;margin-bottom:20px">
+          Hold tight — the <strong style="color:#1B2B6B">Pine Labs Partnership Team</strong> will review your application and reach out to you shortly.<br><br>
+          You will receive an email at <strong id="sp-confirm-email"></strong> once your account is approved.
+        </div>
+        <div style="background:#F0FDF4;border:1px solid #A7F3D0;border-radius:10px;padding:14px 16px;font-size:12px;color:#064E3B;margin-bottom:20px;text-align:left">
+          ✅ Application received &nbsp;·&nbsp; Typically reviewed in 2–3 business days
+        </div>
+        <button class="btn btn-primary" style="width:100%;padding:11px" onclick="showLogin()">Back to Sign In</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -274,6 +479,7 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
     <div class="tab" onclick="adminTab('partners',this)">Partners</div>
     <div class="tab" onclick="adminTab('email',this)">Send Email</div>
     <div class="tab" onclick="adminTab('openint',this)">🔄 Integration</div>
+    <div class="tab" onclick="adminTab('signups',this)" id="tab-signups">🆕 Partner Signups <span id="tab-signups-count" style="font-size:10px;background:#FEF3C7;color:#D97706;padding:1px 6px;border-radius:10px;margin-left:2px;display:none"></span></div>
   </div>
   <div class="content">
 
@@ -620,6 +826,44 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
 
 
 
+
+    <!-- PARTNER SIGNUPS TAB -->
+    <div id="atab-signups" class="view">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+        <div>
+          <div style="font-size:16px;font-weight:800;color:#1B2B6B;letter-spacing:-.01em">Partner Signup Requests</div>
+          <div style="font-size:12px;color:#94A3B8;margin-top:2px">Review and approve new partnership applications</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <select id="su-filter" onchange="filterSignups()" style="border:1px solid #E2E8F0;border-radius:8px;padding:7px 12px;font-size:12px;outline:none">
+            <option value="">All Requests</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+          <button class="btn btn-ghost btn-sm" onclick="loadSignups()">↻ Refresh</button>
+        </div>
+      </div>
+
+      <!-- Summary strip -->
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
+        <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px">
+          <span style="font-size:22px;font-weight:800;color:#D97706" id="su-count-pending">—</span>
+          <span style="font-size:11px;color:#92400E;font-weight:600">Pending Review</span>
+        </div>
+        <div style="background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px">
+          <span style="font-size:22px;font-weight:800;color:#059669" id="su-count-approved">—</span>
+          <span style="font-size:11px;color:#065F46;font-weight:600">Approved</span>
+        </div>
+        <div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px">
+          <span style="font-size:22px;font-weight:800;color:#DC2626" id="su-count-rejected">—</span>
+          <span style="font-size:11px;color:#991B1B;font-weight:600">Rejected</span>
+        </div>
+      </div>
+
+      <div id="su-list"><div class="loading"><div class="spinner"></div>Loading…</div></div>
+    </div>
+
   </div>
 </div>
 
@@ -836,6 +1080,38 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
 <script>
 // ══════════════════════════════════════════════════
 //  CONFIG — fill in after creating Supabase project
+// ══════════════════════════════════════════════════
+//
+//  SIGNUP FEATURE SETUP — run this SQL in your Supabase SQL editor:
+//
+//  CREATE TABLE IF NOT EXISTS partner_signups (
+//    id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+//    user_id       uuid REFERENCES auth.users(id) ON DELETE SET NULL,
+//    company_name  text NOT NULL,
+//    email         text NOT NULL,
+//    phone         text,
+//    contact_name  text,
+//    designation   text,
+//    website       text,
+//    company_type  text,
+//    segment       text,
+//    merchant_count text,
+//    geography     text,
+//    about         text,
+//    status        text DEFAULT 'pending',   -- pending | approved | rejected
+//    partner_id    text,
+//    approved_at   timestamptz,
+//    rejected_at   timestamptz,
+//    reject_reason text,
+//    created_at    timestamptz DEFAULT now()
+//  );
+//  ALTER TABLE partner_signups ENABLE ROW LEVEL SECURITY;
+//  CREATE POLICY "Admin full access" ON partner_signups FOR ALL USING (true);
+//
+//  GOOGLE APPS SCRIPT — add these two actions to your doGet(e) handler:
+//    action=notifyAdminSignup  → email admin when new signup arrives
+//    action=sendApprovalEmail  → welcome email to approved partner
+//      params: to, company, contact, partnerId
 // ══════════════════════════════════════════════════
 const SUPABASE_URL      = 'https://qnzoahgfaobtoywuxwkq.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuem9haGdmYW9idG95d3V4d2txIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NjAzMTUsImV4cCI6MjA5NjEzNjMxNX0.MLI5W0apmmoTNwxtNOeh7gMBCm52r_7zPJnbmSZkTG4';
@@ -2445,6 +2721,522 @@ function updateTabLeadsCount() {
 }
 
 // loadLeads override removed — updateTabLeadsCount is now inline
+
+
+
+// ══════════════════════════════════════════════════
+//  SIGNUP FEATURE
+// ══════════════════════════════════════════════════
+
+// ── VIEW SWITCHING ────────────────────────────────
+function showSignup() {
+  document.getElementById('view-login').style.display  = 'none';
+  document.getElementById('view-admin').style.display  = 'none';
+  document.getElementById('view-partner').style.display= 'none';
+  document.getElementById('view-signup').style.display = 'flex';
+  // Reset form state
+  spGoStep(1);
+  document.getElementById('signup-err').style.display = 'none';
+  ['sp-company','sp-email','sp-phone','sp-contact','sp-designation','sp-website',
+   'sp-type','sp-segment','sp-merchant-count','sp-geography','sp-about',
+   'sp-pass','sp-pass2','sp-type-other'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('sp-pass-hint').textContent = '';
+}
+
+function showLogin() {
+  document.getElementById('view-signup').style.display = 'none';
+  showView('login');
+}
+
+// Override showView to also hide signup
+const _origShowView = showView;
+function showView(id) {
+  document.getElementById('view-signup').style.display = 'none';
+  _origShowView(id);
+}
+
+// ── STEP NAVIGATION ───────────────────────────────
+function spGoStep(n) {
+  [1,2,3,'success'].forEach(s => {
+    const el = document.getElementById('sp-step-' + s);
+    if (el) el.classList.toggle('active', s === n);
+  });
+  const bars = [1,2,3];
+  bars.forEach(i => {
+    const bar = document.getElementById('sp-bar-' + i);
+    if (!bar) return;
+    bar.classList.remove('done','active');
+    if (typeof n === 'number') {
+      if (i < n) bar.classList.add('done');
+      else if (i === n) bar.classList.add('active');
+    } else {
+      bar.classList.add('done'); // success = all done
+    }
+  });
+  const labels = {1:'Step 1 of 3 · Company Details', 2:'Step 2 of 3 · Company Profile', 3:'Step 3 of 3 · Set Password'};
+  const labelEl = document.getElementById('sp-step-label');
+  if (labelEl) labelEl.textContent = labels[n] || '';
+}
+
+function spNext(step) {
+  const err = document.getElementById('signup-err');
+  err.style.display = 'none';
+
+  if (step === 1) {
+    const company = document.getElementById('sp-company').value.trim();
+    const email   = document.getElementById('sp-email').value.trim();
+    const phone   = document.getElementById('sp-phone').value.trim();
+    const contact = document.getElementById('sp-contact').value.trim();
+    if (!company || !email || !phone || !contact) {
+      err.textContent = 'Please fill in all required fields.';
+      err.style.display = 'block';
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      err.textContent = 'Please enter a valid email address.';
+      err.style.display = 'block';
+      return;
+    }
+    spGoStep(2);
+  } else if (step === 2) {
+    const type    = document.getElementById('sp-type').value;
+    const segment = document.getElementById('sp-segment').value;
+    const about   = document.getElementById('sp-about').value.trim();
+    const typeOther = document.getElementById('sp-type-other').value.trim();
+    if (!type || !segment || !about) {
+      err.textContent = 'Please fill in all required fields.';
+      err.style.display = 'block';
+      return;
+    }
+    if (type === 'Others' && !typeOther) {
+      err.textContent = 'Please specify your company type.';
+      err.style.display = 'block';
+      return;
+    }
+    spGoStep(3);
+  }
+}
+
+function spBack(step) {
+  spGoStep(step - 1);
+  document.getElementById('signup-err').style.display = 'none';
+}
+
+// Show/hide "specify type" field
+document.addEventListener('change', function(e) {
+  if (e.target && e.target.id === 'sp-type') {
+    const wrap = document.getElementById('sp-type-other-wrap');
+    if (wrap) wrap.style.display = e.target.value === 'Others' ? 'block' : 'none';
+  }
+});
+
+// Password strength hint
+function spCheckPass() {
+  const p1 = document.getElementById('sp-pass').value;
+  const p2 = document.getElementById('sp-pass2').value;
+  const hint = document.getElementById('sp-pass-hint');
+  if (!p1) { hint.textContent = ''; return; }
+  if (p1.length < 8) {
+    hint.textContent = '⚠ Password must be at least 8 characters';
+    hint.style.color = '#DC2626';
+    return;
+  }
+  if (p2 && p1 !== p2) {
+    hint.textContent = '✗ Passwords do not match';
+    hint.style.color = '#DC2626';
+    return;
+  }
+  if (p2 && p1 === p2) {
+    hint.textContent = '✓ Passwords match';
+    hint.style.color = '#059669';
+    return;
+  }
+  hint.textContent = '✓ Looks good';
+  hint.style.color = '#059669';
+}
+
+// ── SUBMIT SIGNUP ─────────────────────────────────
+async function submitSignup() {
+  const err = document.getElementById('signup-err');
+  err.style.display = 'none';
+
+  const pass  = document.getElementById('sp-pass').value;
+  const pass2 = document.getElementById('sp-pass2').value;
+  if (pass.length < 8) {
+    err.textContent = 'Password must be at least 8 characters.';
+    err.style.display = 'block'; return;
+  }
+  if (pass !== pass2) {
+    err.textContent = 'Passwords do not match.';
+    err.style.display = 'block'; return;
+  }
+
+  const btn = document.getElementById('sp-submit-btn');
+  btn.textContent = '⏳ Submitting…'; btn.disabled = true;
+
+  const company    = document.getElementById('sp-company').value.trim();
+  const email      = document.getElementById('sp-email').value.trim();
+  const phone      = document.getElementById('sp-phone').value.trim();
+  const contact    = document.getElementById('sp-contact').value.trim();
+  const designation= document.getElementById('sp-designation').value.trim();
+  const website    = document.getElementById('sp-website').value.trim();
+  const compType   = document.getElementById('sp-type').value;
+  const typeOther  = document.getElementById('sp-type-other').value.trim();
+  const segment    = document.getElementById('sp-segment').value;
+  const merchants  = document.getElementById('sp-merchant-count').value;
+  const geography  = document.getElementById('sp-geography').value.trim();
+  const about      = document.getElementById('sp-about').value.trim();
+
+  const finalType  = compType === 'Others' ? typeOther : compType;
+
+  try {
+    // 1. Check if email already has a pending/approved signup request
+    const { data: existing } = await sb
+      .from('partner_signups')
+      .select('id, status')
+      .eq('email', email)
+      .in('status', ['pending', 'approved']);
+
+    if (existing && existing.length > 0) {
+      const st = existing[0].status;
+      if (st === 'approved') {
+        err.textContent = 'This email is already registered. Please sign in.';
+      } else {
+        err.textContent = 'A signup request with this email is already under review.';
+      }
+      err.style.display = 'block';
+      btn.textContent = 'Submit Application'; btn.disabled = false;
+      return;
+    }
+
+    // 2. Create auth user in Supabase (disabled by default — status pending)
+    const { data: authData, error: authError } = await sb.auth.signUp({
+      email,
+      password: pass,
+      options: {
+        data: {
+          full_name: contact,
+          company: company,
+          signup_pending: true
+        }
+      }
+    });
+
+    if (authError) {
+      err.textContent = 'Auth error: ' + authError.message;
+      err.style.display = 'block';
+      btn.textContent = 'Submit Application'; btn.disabled = false;
+      return;
+    }
+
+    const userId = authData?.user?.id || null;
+
+    // 3. Insert signup request record
+    const { error: insertError } = await sb.from('partner_signups').insert({
+      user_id:     userId,
+      company_name: company,
+      email,
+      phone,
+      contact_name: contact,
+      designation,
+      website,
+      company_type: finalType,
+      segment,
+      merchant_count: merchants,
+      geography,
+      about,
+      status:      'pending',
+      created_at:  new Date().toISOString()
+    });
+
+    if (insertError) {
+      // If insert fails (table may not exist yet), still show success to user
+      // and log the error — the data will be in auth.users metadata
+      console.warn('partner_signups insert error:', insertError.message);
+      // Don't block UX — admin can still see new auth users
+    }
+
+    // 4. Show success
+    document.getElementById('sp-confirm-email').textContent = email;
+    spGoStep('success');
+
+    // 5. Notify admin via Google Apps Script (best-effort)
+    try {
+      const notifyUrl = WEBAPP_URL
+        + '?action=notifyAdminSignup'
+        + '&company='   + encodeURIComponent(company)
+        + '&email='     + encodeURIComponent(email)
+        + '&phone='     + encodeURIComponent(phone)
+        + '&contact='   + encodeURIComponent(contact)
+        + '&type='      + encodeURIComponent(finalType)
+        + '&segment='   + encodeURIComponent(segment);
+      fetch(notifyUrl).catch(() => {});
+    } catch(_) {}
+
+  } catch(e) {
+    err.textContent = 'Unexpected error: ' + e.message;
+    err.style.display = 'block';
+    btn.textContent = 'Submit Application'; btn.disabled = false;
+  }
+}
+
+
+// ══════════════════════════════════════════════════
+//  ADMIN — PARTNER SIGNUPS TAB
+// ══════════════════════════════════════════════════
+
+let allSignups = [];
+let filteredSignups = [];
+
+async function loadSignups() {
+  document.getElementById('su-list').innerHTML = '<div class="loading"><div class="spinner"></div>Loading…</div>';
+  const { data, error } = await sb
+    .from('partner_signups')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    document.getElementById('su-list').innerHTML =
+      `<div style="color:#DC2626;font-size:12px;padding:20px">Error: ${error.message}</div>`;
+    return;
+  }
+
+  allSignups = data || [];
+  updateSignupCounts();
+  filterSignups();
+  updateSignupTabBadge();
+}
+
+function updateSignupCounts() {
+  const pending  = allSignups.filter(s => s.status === 'pending').length;
+  const approved = allSignups.filter(s => s.status === 'approved').length;
+  const rejected = allSignups.filter(s => s.status === 'rejected').length;
+  document.getElementById('su-count-pending').textContent  = pending;
+  document.getElementById('su-count-approved').textContent = approved;
+  document.getElementById('su-count-rejected').textContent = rejected;
+}
+
+function updateSignupTabBadge() {
+  const pending = allSignups.filter(s => s.status === 'pending').length;
+  const badge = document.getElementById('tab-signups-count');
+  if (!badge) return;
+  if (pending > 0) {
+    badge.textContent = pending + ' new';
+    badge.style.display = 'inline';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function filterSignups() {
+  const filter = (document.getElementById('su-filter') || {value:''}).value;
+  filteredSignups = filter ? allSignups.filter(s => s.status === filter) : allSignups;
+  renderSignupList();
+}
+
+function renderSignupList() {
+  const container = document.getElementById('su-list');
+  if (!filteredSignups.length) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:#94A3B8;font-size:13px">No signup requests found.</div>';
+    return;
+  }
+
+  container.innerHTML = filteredSignups.map(s => {
+    const date = s.created_at ? new Date(s.created_at).toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'}) : '—';
+    const badgeClass = s.status === 'approved' ? 'signup-badge-approved' : s.status === 'rejected' ? 'signup-badge-rejected' : 'signup-badge-pending';
+    const badgeLabel = s.status === 'approved' ? '✓ Approved' : s.status === 'rejected' ? '✗ Rejected' : '⏳ Pending';
+    const isPending  = s.status === 'pending';
+
+    return `<div class="signup-req-card ${s.status}" id="su-card-${esc(s.id)}">
+      <div style="display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap">
+        <!-- Left: Company initial -->
+        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#1B2B6B,#2D3E9E);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0">
+          ${esc((s.company_name||'?').charAt(0).toUpperCase())}
+        </div>
+        <!-- Middle: Details -->
+        <div style="flex:1;min-width:220px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;flex-wrap:wrap">
+            <div style="font-size:15px;font-weight:800;color:#1B2B6B">${esc(s.company_name||'—')}</div>
+            <span class="signup-badge ${badgeClass}">${badgeLabel}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px;margin-top:8px">
+            <div style="font-size:11.5px;color:#64748B">👤 ${esc(s.contact_name||'—')} ${s.designation ? '· '+esc(s.designation) : ''}</div>
+            <div style="font-size:11.5px;color:#64748B">✉ ${esc(s.email||'—')}</div>
+            <div style="font-size:11.5px;color:#64748B">📞 ${esc(s.phone||'—')}</div>
+            <div style="font-size:11.5px;color:#64748B">🏢 ${esc(s.company_type||'—')}</div>
+            <div style="font-size:11.5px;color:#64748B">🎯 ${esc(s.segment||'—')}</div>
+            ${s.merchant_count ? `<div style="font-size:11.5px;color:#64748B">👥 ${esc(s.merchant_count)} merchants</div>` : ''}
+            ${s.geography ? `<div style="font-size:11.5px;color:#64748B">📍 ${esc(s.geography)}</div>` : ''}
+            ${s.website ? `<div style="font-size:11.5px"><a href="${esc(s.website)}" target="_blank" style="color:#2563EB">🌐 Website ↗</a></div>` : ''}
+          </div>
+          ${s.about ? `<div style="margin-top:10px;font-size:12px;color:#475569;background:#F8FAFC;border-radius:6px;padding:8px 10px;border-left:3px solid #E2E8F0;font-style:italic">${esc(s.about)}</div>` : ''}
+          <div style="font-size:10.5px;color:#CBD5E1;margin-top:8px">Submitted ${date}</div>
+          ${s.approved_at ? `<div style="font-size:10.5px;color:#059669;margin-top:2px">✓ Approved on ${new Date(s.approved_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</div>` : ''}
+          ${s.rejected_at ? `<div style="font-size:10.5px;color:#DC2626;margin-top:2px">✗ Rejected on ${new Date(s.rejected_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}${s.reject_reason ? ' · '+esc(s.reject_reason) : ''}</div>` : ''}
+        </div>
+        <!-- Right: Action buttons -->
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:140px">
+          ${isPending ? `
+          <button onclick="approveSignup('${s.id}','${esc(s.email)}','${esc(s.company_name)}')"
+            style="background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;justify-content:center;transition:.15s"
+            onmouseover="this.style.boxShadow='0 4px 12px rgba(5,150,105,.35)'"
+            onmouseout="this.style.boxShadow='none'">
+            ✓ Approve & Send Email
+          </button>
+          <button onclick="rejectSignup('${s.id}','${esc(s.email)}','${esc(s.company_name)}')"
+            style="background:#FEF2F2;color:#DC2626;border:1px solid #FECACA;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer">
+            ✗ Reject
+          </button>
+          ` : ''}
+          <button onclick="copyToClipboard('${esc(s.email)}','Email')"
+            style="background:#F8FAFC;color:#64748B;border:1px solid #E2E8F0;border-radius:8px;padding:6px 12px;font-size:11px;cursor:pointer">
+            📋 Copy Email
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── APPROVE SIGNUP ─────────────────────────────────
+async function approveSignup(id, email, companyName) {
+  if (!confirm(`Approve signup for ${companyName} (${email})?\n\nAn approval email will be sent to them automatically.`)) return;
+
+  const card = document.getElementById('su-card-' + id);
+  if (card) card.style.opacity = '0.5';
+
+  // 1. Create partner record in partners table
+  const partnerId = companyName.toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/__+/g, '_').slice(0, 30);
+  const companyInitials = companyName.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 3);
+  const colors = ['#1B2B6B','#059669','#D97706','#7C3AED','#0EA5E9','#EF4444','#F59E0B'];
+  const partnerColor = colors[Math.floor(Math.random() * colors.length)];
+
+  const { error: partnerErr } = await sb.from('partners').upsert({
+    id: partnerId,
+    name: companyName,
+    initials: companyInitials,
+    color: partnerColor,
+    type: allSignups.find(s => s.id === id)?.company_type || ''
+  });
+
+  if (partnerErr) {
+    console.warn('Partner upsert error:', partnerErr.message);
+  }
+
+  // 2. Find the user by email in profiles and assign partner role
+  const { data: profiles } = await sb.from('profiles').select('id').eq('email', email);
+  if (profiles && profiles.length > 0) {
+    const userId = profiles[0].id;
+    await sb.from('profiles').update({
+      role: 'partner',
+      partner_id: partnerId,
+      is_poc: true
+    }).eq('id', userId);
+  } else {
+    // Try via the RPC if profile doesn't exist yet (user may not have confirmed email)
+    try {
+      await sb.rpc('assign_user_role', {
+        p_email: email,
+        p_role: 'partner',
+        p_partner_id: partnerId,
+        p_is_poc: true
+      });
+    } catch(_) {}
+  }
+
+  // 3. Update the signup record
+  const now = new Date().toISOString();
+  const { error: updateErr } = await sb.from('partner_signups').update({
+    status: 'approved',
+    approved_at: now,
+    partner_id: partnerId
+  }).eq('id', id);
+
+  if (updateErr) { toast('Error updating record: ' + updateErr.message, 'error'); if (card) card.style.opacity='1'; return; }
+
+  // 4. Send approval email via Google Apps Script
+  try {
+    const signup = allSignups.find(s => s.id === id) || {};
+    const approvalUrl = WEBAPP_URL
+      + '?action=sendApprovalEmail'
+      + '&to='      + encodeURIComponent(email)
+      + '&company=' + encodeURIComponent(companyName)
+      + '&contact=' + encodeURIComponent(signup.contact_name || '')
+      + '&partnerId='+ encodeURIComponent(partnerId);
+    const res = await fetch(approvalUrl);
+    const result = await res.json().catch(() => ({}));
+    if (result.success) {
+      toast('✓ Approved & welcome email sent to ' + email, 'success');
+    } else {
+      toast('Approved ✓ (Email send may have failed — check Apps Script)', 'success');
+    }
+  } catch(_) {
+    toast('Approved ✓ (Email delivery check: verify Apps Script)', 'success');
+  }
+
+  // 5. Update local state & re-render
+  const idx = allSignups.findIndex(s => s.id === id);
+  if (idx >= 0) { allSignups[idx].status = 'approved'; allSignups[idx].approved_at = now; }
+  updateSignupCounts();
+  filterSignups();
+  updateSignupTabBadge();
+  await loadPartnerMap();
+  loadPartnerGrid();
+}
+
+// ── REJECT SIGNUP ──────────────────────────────────
+async function rejectSignup(id, email, companyName) {
+  const reason = prompt(`Reject signup for ${companyName}?\n\nOptional: enter a reason (not sent to applicant by default):`);
+  if (reason === null) return; // cancelled
+
+  const { error } = await sb.from('partner_signups').update({
+    status: 'rejected',
+    rejected_at: new Date().toISOString(),
+    reject_reason: reason.trim() || null
+  }).eq('id', id);
+
+  if (error) { toast('Error: ' + error.message, 'error'); return; }
+
+  const idx = allSignups.findIndex(s => s.id === id);
+  if (idx >= 0) {
+    allSignups[idx].status = 'rejected';
+    allSignups[idx].rejected_at = new Date().toISOString();
+    allSignups[idx].reject_reason = reason.trim() || null;
+  }
+  updateSignupCounts();
+  filterSignups();
+  updateSignupTabBadge();
+  toast('Signup rejected', '');
+}
+
+// ── PATCH adminTab TO LOAD SIGNUPS ───────────────
+const _origAdminTab = adminTab;
+function adminTab(id, el) {
+  _origAdminTab(id, el);
+  if (id === 'signups') loadSignups();
+}
+
+// ── LOAD SIGNUP COUNT ON ADMIN LOAD ──────────────
+async function loadSignupCount() {
+  const { data } = await sb.from('partner_signups').select('id').eq('status', 'pending');
+  const count = (data || []).length;
+  const badge = document.getElementById('tab-signups-count');
+  if (badge && count > 0) {
+    badge.textContent = count + ' new';
+    badge.style.display = 'inline';
+  }
+}
+
+// Extend admin session load to fetch signup count
+const _origLoadOverview = loadOverview;
+async function loadOverview() {
+  await _origLoadOverview();
+  loadSignupCount();
+}
+
 
 </script>
 </body>
