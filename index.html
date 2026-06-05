@@ -139,125 +139,33 @@ textarea{resize:vertical;min-height:70px}
   .stat-grid{grid-template-columns:1fr 1fr}
 }
 
-/* ── ENHANCEMENTS ── */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
-
-body{font-family:'DM Sans',system-ui,sans-serif!important}
-input,select,textarea{font-family:'DM Sans',system-ui,sans-serif}
-.nav-logo{font-family:'DM Sans',sans-serif}
-
-/* ── IMPROVED NAV ── */
-.nav{background:linear-gradient(90deg,#0f1b4c,#1B2B6B 60%,#2D3E9E);box-shadow:0 2px 16px rgba(0,0,0,.25)}
-.nav-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(4px)}
-
-/* ── TAB IMPROVEMENTS ── */
-.tab{padding:14px 22px;font-size:12.5px;letter-spacing:.01em}
-.tab.active{color:#1B2B6B;border-bottom-color:#1B2B6B;background:#F8FAFC}
-.tab:hover{background:#F8FAFC}
-
-/* ── IMPROVED CARDS ── */
-.card{border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.stat-card{border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);transition:.2s}
-.stat-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1);transform:translateY(-1px)}
-.stat-val{font-size:30px;letter-spacing:-.5px}
-.stat-lbl{letter-spacing:.8px}
-
-/* ── SEARCH BAR ── */
-#nl-query{font-family:'DM Sans',sans-serif!important;font-size:13px!important}
-.filter-bar input,.filter-bar select{border-radius:8px;font-size:12.5px;padding:8px 12px}
-.filter-bar input:focus,.filter-bar select:focus{outline:none;border-color:#2D3E9E;box-shadow:0 0 0 3px rgba(45,62,158,.12)}
-
-/* ── IMPROVED TABLE ── */
-thead tr{background:linear-gradient(135deg,#1B2B6B,#2D3E9E)}
-th{font-size:10.5px;letter-spacing:.6px;padding:11px 14px}
-td{padding:10px 14px;font-size:12.5px}
-tbody tr:hover{background:#F0F5FF}
-tbody tr.selected{background:#EFF6FF;border-left:3px solid #1B2B6B}
-tbody tr.own-lead{background:#F0FDF4;border-left:3px solid #059669}
-
-/* ── IMPROVED BUTTONS ── */
-.btn{border-radius:8px;font-size:12.5px;letter-spacing:.01em;transition:.15s}
-.btn-primary{background:linear-gradient(135deg,#1B2B6B,#2D3E9E);box-shadow:0 2px 8px rgba(27,43,107,.25)}
-.btn-primary:hover{background:linear-gradient(135deg,#2D3E9E,#1B2B6B);box-shadow:0 4px 12px rgba(27,43,107,.35);transform:translateY(-1px)}
-.btn-green{background:linear-gradient(135deg,#059669,#10b981)}
-.btn-danger{background:linear-gradient(135deg,#DC2626,#ef4444)}
-
-/* ── IMPROVED BADGES ── */
-.badge{font-size:10.5px;padding:3px 10px;border-radius:20px;letter-spacing:.2px}
-
-/* ── IMPROVED LOGIN ── */
-#view-login{background:linear-gradient(135deg,#0f1b4c 0%,#1B2B6B 50%,#2a3b8e 100%)}
-.login-card{box-shadow:0 24px 80px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08)}
-.login-title{font-size:22px;font-weight:800}
-
-/* ── IMPROVED MODALS ── */
-.modal{border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
-.modal-overlay{backdrop-filter:blur(4px)}
-.modal-title{font-size:17px;font-weight:800;letter-spacing:-.01em}
-
-/* ── PARTNER CARDS ── */
-.partner-card{border-radius:12px;transition:.2s;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.partner-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.12);transform:translateY(-2px)}
-
-/* ── TOAST ── */
-.toast{border-radius:12px;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
-
-/* ── EXPORT BTN ── */
-.export-btn{background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;transition:.15s}
-.export-btn:hover{box-shadow:0 4px 12px rgba(5,150,105,.3);transform:translateY(-1px)}
-.export-btn-csv{background:linear-gradient(135deg,#0ea5e9,#38bdf8)}
-.export-btn-secondary{background:linear-gradient(135deg,#7c3aed,#8b5cf6)}
-
-/* ── DATE RANGE PICKER ── */
-.date-range-wrap{display:flex;gap:6px;align-items:center}
-.date-range-wrap input[type=date]{padding:7px 10px;border:1px solid #E2E8F0;border-radius:8px;font-size:12px;color:#334155;background:#fff;font-family:'DM Sans',sans-serif}
-
-/* ── QUICK STATS BAR ── */
-.quick-stats-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:10px 14px;align-items:center;font-size:12px}
-.quick-stat{display:flex;align-items:center;gap:5px;color:#334155;font-weight:600}
-.quick-stat-val{font-size:15px;font-weight:800;color:#1B2B6B}
-
-/* ── MONOSPACE ── */
-td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
-
-/* ── PRINT ── */
-@media print{.nav,.tabs,.filter-bar,.bulk-bar,.pagination,.btn{display:none!important}.content{max-width:100%}}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.view.active{animation:fadeIn .2s ease}
-.stat-card{animation:fadeIn .3s ease both}
-
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:#F1F5F9}
-::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:#94A3B8}
-
-
 /* ── SIGNUP VIEW ── */
-#view-signup{display:none;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#0f1b4c 0%,#1B2B6B 50%,#2a3b8e 100%);padding:24px}
-.signup-card{background:#fff;border-radius:18px;padding:36px 40px;width:100%;max-width:540px;box-shadow:0 24px 80px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08)}
-.signup-step{display:none}.signup-step.active{display:block}
-.signup-progress{display:flex;gap:8px;margin-bottom:28px;align-items:center}
-.signup-progress-step{flex:1;height:4px;border-radius:2px;background:#E2E8F0;transition:.4s}
-.signup-progress-step.done{background:#1B2B6B}
-.signup-progress-step.active{background:#2D3E9E}
-.signup-success{text-align:center;padding:20px 0}
-.signup-success-icon{font-size:52px;margin-bottom:16px}
+#view-signup{display:none;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#0f1b4c 0%,#1B2B6B 50%,#2a3b8e 100%);padding:24px;box-sizing:border-box}
+.signup-card{background:#fff;border-radius:16px;padding:32px 36px;width:100%;max-width:540px;box-shadow:0 24px 80px rgba(0,0,0,.35);max-height:90vh;overflow-y:auto}
+.sp-step{display:none}.sp-step.active{display:block}
+.sp-progress{display:flex;gap:8px;margin-bottom:6px}
+.sp-bar{flex:1;height:4px;border-radius:2px;background:#E2E8F0;transition:.4s}
+.sp-bar.done{background:#059669}.sp-bar.active{background:#1B2B6B}
 
-/* ── SIGNUP BADGE STYLES ── */
-.signup-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}
-.signup-badge-pending{background:#FFFBEB;color:#D97706;border:1px solid #FDE68A}
-.signup-badge-approved{background:#ECFDF5;color:#059669;border:1px solid #A7F3D0}
-.signup-badge-rejected{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA}
+/* ── SIGNUP BADGES ── */
+.su-badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.su-pending{background:#FFFBEB;color:#D97706;border:1px solid #FDE68A}
+.su-approved{background:#ECFDF5;color:#059669;border:1px solid #A7F3D0}
+.su-rejected{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA}
 
-/* ── SIGNUP REQUEST CARD ── */
-.signup-req-card{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:18px;margin-bottom:12px;transition:.2s}
-.signup-req-card:hover{border-color:#BFDBFE;box-shadow:0 4px 16px rgba(27,43,107,.08)}
-.signup-req-card.pending{border-left:3px solid #D97706}
-.signup-req-card.approved{border-left:3px solid #059669;opacity:.75}
-.signup-req-card.rejected{border-left:3px solid #DC2626;opacity:.6}
+/* ── SIGNUP REQUEST CARDS ── */
+.su-card{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:18px;margin-bottom:12px;transition:.15s}
+.su-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.su-card.pending{border-left:3px solid #D97706}
+.su-card.approved{border-left:3px solid #059669;opacity:.75}
+.su-card.rejected{border-left:3px solid #DC2626;opacity:.6}
+
+/* ── EXPORT/PRINT BUTTONS ── */
+.btn-export{background:#059669;color:#fff;border:none;border-radius:7px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer}
+.btn-export:hover{background:#047857}
+
+/* ── QUICK STATS ── */
+.quick-stats{display:none;flex-wrap:wrap;gap:10px;margin-bottom:10px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:10px 14px;align-items:center;font-size:12px;font-weight:600;color:#1B2B6B}
 
 </style>
 </head>
@@ -273,138 +181,98 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
     <div class="form-group"><label>Email address</label><input type="email" id="login-email" placeholder="you@company.com"></div>
     <div class="form-group"><label>Password</label><input type="password" id="login-pass" placeholder="••••••••"></div>
     <button class="btn btn-primary" style="width:100%;margin-top:6px;padding:10px" onclick="doLogin()">Sign In</button>
-    <div style="text-align:center;margin-top:16px;font-size:12.5px;color:#64748B">
+    <div style="text-align:center;margin-top:14px;font-size:13px;color:#64748B">
       Not a member yet?
       <span onclick="showSignup()" style="color:#1B2B6B;font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:2px">Sign up</span>
     </div>
-    <div class="login-footer" style="margin-top:14px">Pine Labs · Partner Operations · Confidential</div>
+    <div class="login-footer" style="margin-top:12px">Pine Labs · Partner Operations · Confidential</div>
   </div>
 </div>
 
 <!-- ═══ SIGNUP VIEW ═══ -->
 <div id="view-signup">
   <div class="signup-card">
-    <!-- Back link -->
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:22px">
-      <span onclick="showLogin()" style="cursor:pointer;color:#94A3B8;font-size:13px;display:flex;align-items:center;gap:4px;transition:.15s" onmouseover="this.style.color='#1B2B6B'" onmouseout="this.style.color='#94A3B8'">← Back to Sign In</span>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
+      <span onclick="showLogin()" style="cursor:pointer;color:#94A3B8;font-size:13px" onmouseover="this.style.color='#1B2B6B'" onmouseout="this.style.color='#94A3B8'">← Back to Sign In</span>
     </div>
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
       <div class="login-logo" style="margin:0;flex-shrink:0">PL</div>
       <div>
-        <div style="font-size:18px;font-weight:800;color:#1B2B6B;letter-spacing:-.01em">Partner Sign Up</div>
-        <div style="font-size:11.5px;color:#94A3B8;margin-top:1px">Apply to join the Pine Labs Partnership Program</div>
+        <div style="font-size:18px;font-weight:800;color:#1B2B6B">Partner Sign Up</div>
+        <div style="font-size:11px;color:#94A3B8">Apply to join the Pine Labs Partnership Program</div>
       </div>
     </div>
-
-    <!-- Progress bar -->
-    <div class="signup-progress" style="margin-top:20px">
-      <div class="signup-progress-step active" id="sp-bar-1"></div>
-      <div class="signup-progress-step" id="sp-bar-2"></div>
-      <div class="signup-progress-step" id="sp-bar-3"></div>
+    <div class="sp-progress" style="margin-top:16px" id="sp-bars">
+      <div class="sp-bar active" id="sp-bar-1"></div>
+      <div class="sp-bar" id="sp-bar-2"></div>
+      <div class="sp-bar" id="sp-bar-3"></div>
     </div>
-    <div id="sp-step-label" style="font-size:11px;color:#94A3B8;margin-bottom:18px">Step 1 of 3 · Company Details</div>
-
+    <div id="sp-step-label" style="font-size:11px;color:#94A3B8;margin-bottom:16px">Step 1 of 3 · Company Details</div>
     <div class="err-msg" id="signup-err"></div>
 
-    <!-- ── STEP 1: Company Details ── -->
-    <div class="signup-step active" id="sp-step-1">
-      <div style="font-size:13px;font-weight:700;color:#1B2B6B;margin-bottom:14px">Company Details</div>
+    <!-- STEP 1 -->
+    <div class="sp-step active" id="sp-step-1">
+      <div style="font-size:13px;font-weight:700;color:#1B2B6B;margin-bottom:12px">Company Details</div>
       <div class="form-grid" style="gap:12px;margin-bottom:12px">
-        <div class="form-group">
-          <label>Company Name <span class="req">*</span></label>
-          <input type="text" id="sp-company" placeholder="e.g. GoFrugal Technologies">
-        </div>
-        <div class="form-group">
-          <label>Company Email <span class="req">*</span></label>
-          <input type="email" id="sp-email" placeholder="partnerships@yourcompany.com">
-        </div>
-        <div class="form-group">
-          <label>Phone Number <span class="req">*</span></label>
-          <input type="tel" id="sp-phone" placeholder="+91 98765 43210">
-        </div>
-        <div class="form-group">
-          <label>Contact Person Name <span class="req">*</span></label>
-          <input type="text" id="sp-contact" placeholder="Your full name">
-        </div>
-        <div class="form-group">
-          <label>Designation</label>
-          <input type="text" id="sp-designation" placeholder="e.g. Head of Partnerships">
-        </div>
-        <div class="form-group">
-          <label>Website</label>
-          <input type="url" id="sp-website" placeholder="https://yourcompany.com">
-        </div>
+        <div class="form-group"><label>Company Name <span class="req">*</span></label><input type="text" id="sp-company" placeholder="e.g. GoFrugal Technologies"></div>
+        <div class="form-group"><label>Company Email <span class="req">*</span></label><input type="email" id="sp-email" placeholder="partnerships@yourcompany.com"></div>
+        <div class="form-group"><label>Phone Number <span class="req">*</span></label><input type="tel" id="sp-phone" placeholder="+91 98765 43210"></div>
+        <div class="form-group"><label>Contact Person <span class="req">*</span></label><input type="text" id="sp-contact" placeholder="Your full name"></div>
+        <div class="form-group"><label>Designation</label><input type="text" id="sp-designation" placeholder="e.g. Head of Partnerships"></div>
+        <div class="form-group"><label>Website</label><input type="url" id="sp-website" placeholder="https://yourcompany.com"></div>
       </div>
-      <button class="btn btn-primary" style="width:100%;padding:11px;margin-top:6px" onclick="spNext(1)">Continue →</button>
+      <button class="btn btn-primary" style="width:100%;padding:11px" onclick="spNext(1)">Continue →</button>
     </div>
 
-    <!-- ── STEP 2: Company Type & Segment ── -->
-    <div class="signup-step" id="sp-step-2">
-      <div style="font-size:13px;font-weight:700;color:#1B2B6B;margin-bottom:14px">Company Profile</div>
-      <div class="form-grid" style="gap:12px;margin-bottom:12px">
-        <div class="form-group" style="grid-column:1/-1">
+    <!-- STEP 2 -->
+    <div class="sp-step" id="sp-step-2">
+      <div style="font-size:13px;font-weight:700;color:#1B2B6B;margin-bottom:12px">Company Profile</div>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:12px">
+        <div class="form-group">
           <label>Type of Company <span class="req">*</span></label>
-          <select id="sp-type">
+          <select id="sp-type" onchange="document.getElementById('sp-type-other-wrap').style.display=this.value==='Others'?'block':'none'">
             <option value="">Select company type…</option>
-            <option>ERP Player</option>
-            <option>CRM Player</option>
-            <option>Logistics Provider</option>
-            <option>POS / Billing Software</option>
-            <option>Payment Aggregator</option>
-            <option>E-Commerce Platform</option>
-            <option>Cloud Telephony / IVR</option>
-            <option>Accounting & Finance Software</option>
-            <option>HR & Payroll Platform</option>
-            <option>Marketing & CRM Tools</option>
-            <option>System Integrator / VAR</option>
-            <option>Consulting / Advisory Firm</option>
-            <option>Technology Distributor</option>
+            <option>ERP Player</option><option>CRM Player</option><option>Logistics Provider</option>
+            <option>POS / Billing Software</option><option>Payment Aggregator</option>
+            <option>E-Commerce Platform</option><option>Cloud Telephony / IVR</option>
+            <option>Accounting & Finance Software</option><option>HR & Payroll Platform</option>
+            <option>Marketing & CRM Tools</option><option>System Integrator / VAR</option>
+            <option>Consulting / Advisory Firm</option><option>Technology Distributor</option>
             <option>Others</option>
           </select>
         </div>
-        <div class="form-group" id="sp-type-other-wrap" style="grid-column:1/-1;display:none">
+        <div class="form-group" id="sp-type-other-wrap" style="display:none">
           <label>Please specify <span class="req">*</span></label>
           <input type="text" id="sp-type-other" placeholder="Describe your company type">
         </div>
-        <div class="form-group" style="grid-column:1/-1">
+        <div class="form-group">
           <label>Primary Segment <span class="req">*</span></label>
           <select id="sp-segment">
             <option value="">Select primary segment…</option>
-            <option>Food & Beverage (F&B)</option>
-            <option>Hospitality & Hotels</option>
-            <option>Retail & Fashion</option>
-            <option>Grocery & Supermarkets</option>
-            <option>Fitness & Wellness</option>
-            <option>Healthcare & Pharmacy</option>
-            <option>Accounting & Taxation</option>
-            <option>Education & EdTech</option>
-            <option>Automotive & Garages</option>
-            <option>Beauty & Salons</option>
-            <option>Jewellery & Luxury</option>
-            <option>Electronics & Appliances</option>
-            <option>Logistics & Supply Chain</option>
-            <option>Professional Services</option>
-            <option>Multi-Segment / Cross-Industry</option>
-            <option>Others</option>
+            <option>Food & Beverage (F&B)</option><option>Hospitality & Hotels</option>
+            <option>Retail & Fashion</option><option>Grocery & Supermarkets</option>
+            <option>Fitness & Wellness</option><option>Healthcare & Pharmacy</option>
+            <option>Accounting & Taxation</option><option>Education & EdTech</option>
+            <option>Automotive & Garages</option><option>Beauty & Salons</option>
+            <option>Jewellery & Luxury</option><option>Electronics & Appliances</option>
+            <option>Logistics & Supply Chain</option><option>Professional Services</option>
+            <option>Multi-Segment / Cross-Industry</option><option>Others</option>
           </select>
         </div>
-        <div class="form-group" style="grid-column:1/-1">
+        <div class="form-group">
           <label>Number of Merchants / Clients</label>
-          <select id="sp-merchant-count">
+          <select id="sp-merchants">
             <option value="">Select range…</option>
-            <option>Less than 100</option>
-            <option>100 – 500</option>
-            <option>500 – 2,000</option>
-            <option>2,000 – 10,000</option>
-            <option>More than 10,000</option>
+            <option>Less than 100</option><option>100 – 500</option>
+            <option>500 – 2,000</option><option>2,000 – 10,000</option><option>More than 10,000</option>
           </select>
         </div>
-        <div class="form-group" style="grid-column:1/-1">
+        <div class="form-group">
           <label>Geography / States Covered</label>
-          <input type="text" id="sp-geography" placeholder="e.g. Maharashtra, Karnataka, Delhi, Pan-India">
+          <input type="text" id="sp-geography" placeholder="e.g. Maharashtra, Karnataka, Pan-India">
         </div>
-        <div class="form-group" style="grid-column:1/-1">
-          <label>Tell us about your company <span class="req">*</span></label>
+        <div class="form-group">
+          <label>About Your Company <span class="req">*</span></label>
           <textarea id="sp-about" rows="3" placeholder="Brief description of what your company does and why you want to partner with Pine Labs…"></textarea>
         </div>
       </div>
@@ -414,24 +282,18 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
       </div>
     </div>
 
-    <!-- ── STEP 3: Set Password ── -->
-    <div class="signup-step" id="sp-step-3">
-      <div style="font-size:13px;font-weight:700;color:#1B2B6B;margin-bottom:6px">Set Your Password</div>
-      <div style="font-size:12px;color:#64748B;margin-bottom:16px">This will be your login password once your application is approved.</div>
-      <div class="form-grid" style="gap:12px;margin-bottom:12px">
-        <div class="form-group">
-          <label>Password <span class="req">*</span></label>
-          <input type="password" id="sp-pass" placeholder="Min. 8 characters" oninput="spCheckPass()">
-        </div>
-        <div class="form-group">
-          <label>Confirm Password <span class="req">*</span></label>
-          <input type="password" id="sp-pass2" placeholder="Repeat password" oninput="spCheckPass()">
-        </div>
+    <!-- STEP 3 -->
+    <div class="sp-step" id="sp-step-3">
+      <div style="font-size:13px;font-weight:700;color:#1B2B6B;margin-bottom:4px">Set Your Password</div>
+      <div style="font-size:12px;color:#64748B;margin-bottom:14px">This will be used to sign in once your application is approved.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px">
+        <div class="form-group"><label>Password <span class="req">*</span></label><input type="password" id="sp-pass" placeholder="Min. 8 characters" oninput="spCheckPass()"></div>
+        <div class="form-group"><label>Confirm Password <span class="req">*</span></label><input type="password" id="sp-pass2" placeholder="Repeat password" oninput="spCheckPass()"></div>
       </div>
-      <div id="sp-pass-hint" style="font-size:11.5px;color:#94A3B8;margin-bottom:16px;min-height:18px"></div>
-      <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:12px 14px;font-size:11.5px;color:#334155;margin-bottom:16px">
+      <div id="sp-pass-hint" style="font-size:11.5px;color:#94A3B8;margin-bottom:14px;min-height:16px"></div>
+      <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:12px;font-size:12px;color:#334155;margin-bottom:14px">
         <strong style="color:#1B2B6B">What happens next?</strong><br>
-        Our partnership team will review your application and reach out within 2–3 business days. Once approved, you can log in and start submitting leads.
+        Our team will review your application and reach out within 2–3 business days. Once approved you can sign in and start submitting leads.
       </div>
       <div style="display:flex;gap:10px">
         <button class="btn btn-ghost" style="flex:1;padding:10px" onclick="spBack(3)">← Back</button>
@@ -439,16 +301,16 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
       </div>
     </div>
 
-    <!-- ── SUCCESS STATE ── -->
-    <div class="signup-step" id="sp-step-success">
-      <div class="signup-success">
-        <div class="signup-success-icon">🎉</div>
+    <!-- SUCCESS -->
+    <div class="sp-step" id="sp-step-success">
+      <div style="text-align:center;padding:20px 0">
+        <div style="font-size:52px;margin-bottom:12px">🎉</div>
         <div style="font-size:20px;font-weight:800;color:#1B2B6B;margin-bottom:8px">Application Submitted!</div>
-        <div style="font-size:13.5px;color:#64748B;line-height:1.6;margin-bottom:20px">
-          Hold tight — the <strong style="color:#1B2B6B">Pine Labs Partnership Team</strong> will review your application and reach out to you shortly.<br><br>
-          You will receive an email at <strong id="sp-confirm-email"></strong> once your account is approved.
+        <div style="font-size:13px;color:#64748B;line-height:1.7;margin-bottom:16px">
+          Hold tight — the <strong style="color:#1B2B6B">Pine Labs Partnership Team</strong> will review your application and reach out shortly.<br><br>
+          You'll receive an email at <strong id="sp-confirm-email"></strong> once approved.
         </div>
-        <div style="background:#F0FDF4;border:1px solid #A7F3D0;border-radius:10px;padding:14px 16px;font-size:12px;color:#064E3B;margin-bottom:20px;text-align:left">
+        <div style="background:#F0FDF4;border:1px solid #A7F3D0;border-radius:10px;padding:12px;font-size:12px;color:#064E3B;margin-bottom:16px;text-align:left">
           ✅ Application received &nbsp;·&nbsp; Typically reviewed in 2–3 business days
         </div>
         <button class="btn btn-primary" style="width:100%;padding:11px" onclick="showLogin()">Back to Sign In</button>
@@ -461,9 +323,9 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
 <div id="view-admin" class="view">
   <nav class="nav">
     <div class="nav-left">
-      <div class="nav-logo" style="font-weight:900;font-size:14px;letter-spacing:-.5px">PL</div>
+      <div class="nav-logo">PL</div>
       <div>
-        <div class="nav-title" style="letter-spacing:-.01em;font-weight:800">Pine Labs Partner Portal</div>
+        <div class="nav-title">Pine Labs Partner Portal</div>
       </div>
       <span class="nav-badge">ADMIN</span>
     </div>
@@ -474,12 +336,12 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
   </nav>
   <div class="tabs">
     <div class="tab active" onclick="adminTab('overview',this)">Overview</div>
-    <div class="tab" onclick="adminTab('leads',this)">All Leads <span id="tab-leads-count" style="font-size:10px;background:#E2E8F0;color:#64748B;padding:1px 6px;border-radius:10px;margin-left:2px"></span></div>
+    <div class="tab" onclick="adminTab('leads',this)">All Leads</div>
     <div class="tab" onclick="adminTab('leaderboard',this)">🏆 Leaderboard</div>
     <div class="tab" onclick="adminTab('partners',this)">Partners</div>
     <div class="tab" onclick="adminTab('email',this)">Send Email</div>
     <div class="tab" onclick="adminTab('openint',this)">🔄 Integration</div>
-    <div class="tab" onclick="adminTab('signups',this)" id="tab-signups">🆕 Partner Signups <span id="tab-signups-count" style="font-size:10px;background:#FEF3C7;color:#D97706;padding:1px 6px;border-radius:10px;margin-left:2px;display:none"></span></div>
+    <div class="tab" onclick="adminTab('signups',this)">🆕 Partner Signups <span id="tab-signups-badge" style="display:none;font-size:10px;background:#FEF3C7;color:#D97706;padding:1px 6px;border-radius:10px;margin-left:2px"></span></div>
   </div>
   <div class="content">
 
@@ -532,7 +394,7 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
       </div>
 
       <!-- BOTTOM ROW: Status funnel + State breakdown + Recent -->
-      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
         <div class="card">
           <div class="card-title">Status Funnel</div>
           <div id="status-funnel"></div>
@@ -578,29 +440,27 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
           <option>Converted</option><option>Not Converted</option>
         </select>
         <select id="f-state" onchange="applyFilters()"><option value="">All States</option></select>
-        <button class="btn btn-ghost btn-sm" onclick="clearAllFilters()" style="color:#DC2626;border-color:#FECACA" title="Clear all filters">✕ Clear Filters</button>
         <button class="btn btn-ghost btn-sm" onclick="loadLeads()">↻ Refresh</button>
-        <button class="export-btn export-btn-csv btn-sm" onclick="exportLeadsCSV()" title="Export to CSV">⬇ CSV</button>
-        <button class="export-btn export-btn-secondary btn-sm" onclick="printLeads()" title="Print leads">🖨 Print</button>
-        <div class="date-range-wrap" title="Filter by date range">
-          <input type="date" id="f-date-from" onchange="applyFilters()" style="padding:5px 8px;font-size:11px">
-          <span style="color:#94A3B8;font-size:11px">to</span>
-          <input type="date" id="f-date-to" onchange="applyFilters()" style="padding:5px 8px;font-size:11px">
-        </div>
+        <button class="btn-export btn-sm" onclick="exportLeadsCSV()">⬇ CSV</button>
+        <button class="btn-export btn-sm" style="background:#7c3aed" onclick="printLeads()">🖨 Print</button>
+        <input type="date" id="f-date-from" onchange="applyFilters()" style="padding:6px 8px;border:1px solid #E2E8F0;border-radius:7px;font-size:12px">
+        <span style="font-size:11px;color:#94A3B8">to</span>
+        <input type="date" id="f-date-to" onchange="applyFilters()" style="padding:6px 8px;border:1px solid #E2E8F0;border-radius:7px;font-size:12px">
+        <button class="btn btn-ghost btn-sm" style="color:#DC2626;border-color:#FECACA" onclick="clearAllFilters()">✕ Clear</button>
       </div>
       <div class="bulk-bar" id="bulk-bar">
         <span id="bulk-count">0 selected</span>
         <button class="btn btn-sm" style="background:#fff;color:#1B2B6B" onclick="adminTab('email',document.querySelectorAll('.tab')[3])">✉ Send Email</button>
         <button class="btn btn-sm btn-ghost" style="border-color:rgba(255,255,255,.3);color:#fff" onclick="clearSelection()">✕ Clear</button>
       </div>
-      <div class="quick-stats-bar" id="quick-stats-bar" style="display:none">
-        <div class="quick-stat"><span class="quick-stat-val" id="qs-total">0</span> Total</div>
-        <div style="color:#E2E8F0">|</div>
-        <div class="quick-stat" style="color:#059669"><span class="quick-stat-val" id="qs-conv" style="color:#059669">0</span> Converted</div>
-        <div class="quick-stat" style="color:#7C3AED"><span class="quick-stat-val" id="qs-wip" style="color:#7C3AED">0</span> WIP</div>
-        <div class="quick-stat" style="color:#2563EB"><span class="quick-stat-val" id="qs-new" style="color:#2563EB">0</span> New</div>
-        <div style="flex:1"></div>
-        <span id="qs-rate" style="font-size:12px;font-weight:700;color:#1B2B6B"></span>
+      <div class="quick-stats" id="quick-stats">
+        <span>Showing: <strong id="qs-total">0</strong></span>
+        <span style="color:#E2E8F0">|</span>
+        <span style="color:#059669">✓ <strong id="qs-conv">0</strong> Converted</span>
+        <span style="color:#7C3AED">⚙ <strong id="qs-wip">0</strong> WIP</span>
+        <span style="color:#2563EB">🆕 <strong id="qs-new">0</strong> New</span>
+        <span style="flex:1"></span>
+        <span id="qs-rate" style="font-weight:700"></span>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -719,12 +579,7 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
           <div style="font-size:12px;color:#94A3B8;margin-top:2px">Mutual referral merchants: PetPooja installs Pine Labs, Pine Labs installs PetPooja</div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <input type="text" id="oi-search" placeholder="Search merchant, city or POS ID…" oninput="filterOI()" style="border:1px solid #E2E8F0;border-radius:8px;padding:7px 12px;font-size:12px;width:200px;outline:none">
-          <select id="oi-live-filter" onchange="filterOI()" style="border:1px solid #E2E8F0;border-radius:8px;padding:7px 10px;font-size:12px;outline:none">
-            <option value="">All Integration</option>
-            <option value="Live">Live Only</option>
-            <option value="Not Live">Not Live</option>
-          </select>
+          <input type="text" id="oi-search" placeholder="Search merchant or city…" oninput="filterOI()" style="border:1px solid #E2E8F0;border-radius:8px;padding:7px 12px;font-size:12px;width:200px;outline:none">
           <select id="oi-status-filter" onchange="filterOI()" style="border:1px solid #E2E8F0;border-radius:8px;padding:7px 10px;font-size:12px;outline:none">
             <option value="">All Statuses</option>
             <option>Live from PL &amp; PP</option>
@@ -831,10 +686,10 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
     <div id="atab-signups" class="view">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
         <div>
-          <div style="font-size:16px;font-weight:800;color:#1B2B6B;letter-spacing:-.01em">Partner Signup Requests</div>
+          <div style="font-size:16px;font-weight:800;color:#1B2B6B">Partner Signup Requests</div>
           <div style="font-size:12px;color:#94A3B8;margin-top:2px">Review and approve new partnership applications</div>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;gap:8px;align-items:center">
           <select id="su-filter" onchange="filterSignups()" style="border:1px solid #E2E8F0;border-radius:8px;padding:7px 12px;font-size:12px;outline:none">
             <option value="">All Requests</option>
             <option value="pending">Pending</option>
@@ -844,12 +699,10 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
           <button class="btn btn-ghost btn-sm" onclick="loadSignups()">↻ Refresh</button>
         </div>
       </div>
-
-      <!-- Summary strip -->
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
         <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px">
           <span style="font-size:22px;font-weight:800;color:#D97706" id="su-count-pending">—</span>
-          <span style="font-size:11px;color:#92400E;font-weight:600">Pending Review</span>
+          <span style="font-size:11px;color:#92400E;font-weight:600">Pending</span>
         </div>
         <div style="background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px">
           <span style="font-size:22px;font-weight:800;color:#059669" id="su-count-approved">—</span>
@@ -860,7 +713,6 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
           <span style="font-size:11px;color:#991B1B;font-weight:600">Rejected</span>
         </div>
       </div>
-
       <div id="su-list"><div class="loading"><div class="spinner"></div>Loading…</div></div>
     </div>
 
@@ -874,7 +726,7 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
       <div class="nav-logo" id="p-logo">PP</div>
       <div>
         <div class="nav-title" id="p-name">Partner Portal</div>
-        <div id="p-portal-subtitle" style="color:rgba(255,255,255,.6);font-size:10px">Sales Portal</div>
+        <div style="color:rgba(255,255,255,.6);font-size:10px">Sales Portal</div>
       </div>
     </div>
     <div class="nav-right">
@@ -928,9 +780,6 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
       </div>
       <div class="form-group" style="margin-top:8px"><label>Remarks / Notes</label><textarea id="nl-remarks" placeholder="Any relevant notes…" rows="2"></textarea></div>
       <button class="btn btn-primary" style="margin-top:14px;width:100%;padding:11px" onclick="submitLead()">Submit Lead</button>
-      <div id="lead-submit-counter" style="margin-top:10px;text-align:center;font-size:11px;color:#94A3B8;display:none">
-        <span id="lead-submit-count" style="font-weight:700;color:#1B2B6B">0</span> leads submitted this session
-      </div>
     </div>
 
     <!-- BULK UPLOAD -->
@@ -1081,38 +930,6 @@ td.mono,span.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
 // ══════════════════════════════════════════════════
 //  CONFIG — fill in after creating Supabase project
 // ══════════════════════════════════════════════════
-//
-//  SIGNUP FEATURE SETUP — run this SQL in your Supabase SQL editor:
-//
-//  CREATE TABLE IF NOT EXISTS partner_signups (
-//    id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-//    user_id       uuid REFERENCES auth.users(id) ON DELETE SET NULL,
-//    company_name  text NOT NULL,
-//    email         text NOT NULL,
-//    phone         text,
-//    contact_name  text,
-//    designation   text,
-//    website       text,
-//    company_type  text,
-//    segment       text,
-//    merchant_count text,
-//    geography     text,
-//    about         text,
-//    status        text DEFAULT 'pending',   -- pending | approved | rejected
-//    partner_id    text,
-//    approved_at   timestamptz,
-//    rejected_at   timestamptz,
-//    reject_reason text,
-//    created_at    timestamptz DEFAULT now()
-//  );
-//  ALTER TABLE partner_signups ENABLE ROW LEVEL SECURITY;
-//  CREATE POLICY "Admin full access" ON partner_signups FOR ALL USING (true);
-//
-//  GOOGLE APPS SCRIPT — add these two actions to your doGet(e) handler:
-//    action=notifyAdminSignup  → email admin when new signup arrives
-//    action=sendApprovalEmail  → welcome email to approved partner
-//      params: to, company, contact, partnerId
-// ══════════════════════════════════════════════════
 const SUPABASE_URL      = 'https://qnzoahgfaobtoywuxwkq.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuem9haGdmYW9idG95d3V4d2txIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NjAzMTUsImV4cCI6MjA5NjEzNjMxNX0.MLI5W0apmmoTNwxtNOeh7gMBCm52r_7zPJnbmSZkTG4';
 
@@ -1166,8 +983,7 @@ function showView(id) {
   document.getElementById('view-login').style.display  = (id==='login')  ? 'flex' : 'none';
   document.getElementById('view-admin').style.display  = (id==='admin')  ? 'block': 'none';
   document.getElementById('view-partner').style.display= (id==='partner')? 'block': 'none';
-  const su = document.getElementById('view-signup');
-  if (su) su.style.display = 'none';
+  document.getElementById('view-signup').style.display = 'none';
 }
 
 // ── AUTH ─────────────────────────────────────────
@@ -1210,7 +1026,7 @@ async function loadUserSession(user) {
     document.getElementById('admin-user-email').textContent = user.email;
     showView('admin');
     await loadPartnerMap();
-    loadOverview();
+    loadOverview(); // calls loadSignupCountBadge internally
     loadLeads();
     loadPartnerGrid();
     populateAdminFilters();
@@ -1604,34 +1420,25 @@ async function loadOverview() {
     </div>`;
   }).join('');
   document.getElementById('recent-leads').innerHTML = recentRows || '<div style="color:#94A3B8;font-size:12px">No leads yet</div>';
-  loadSignupCount();
+  loadSignupCountBadge();
 }
 
 // ── ALL LEADS ─────────────────────────────────────
 async function loadLeads() {
   document.getElementById('leads-tbody').innerHTML = '<tr><td colspan="9" class="loading"><div class="spinner"></div>Loading…</td></tr>';
-  // Paginate through ALL rows — Supabase returns max 1000 per request
-  let allRows = [];
-  let from = 0;
+  let allRows = [], from = 0;
   const batchSize = 1000;
   while (true) {
-    const {data, error, count} = await sb.from('leads')
-      .select('*', {count: 'exact'})
-      .order('created_at', {ascending: false})
-      .range(from, from + batchSize - 1);
-    if (error) {
-      document.getElementById('leads-tbody').innerHTML = `<tr><td colspan="9" style="padding:20px;text-align:center;color:#DC2626">${error.message}</td></tr>`;
-      return;
-    }
-    if (!data || data.length === 0) break;
+    const {data, error} = await sb.from('leads').select('*').order('created_at',{ascending:false}).range(from, from+batchSize-1);
+    if (error) { document.getElementById('leads-tbody').innerHTML = `<tr><td colspan="9" style="padding:20px;text-align:center;color:#DC2626">${error.message}</td></tr>`; return; }
+    if (!data || !data.length) break;
     allRows = allRows.concat(data);
-    if (data.length < batchSize) break; // last page
+    if (data.length < batchSize) break;
     from += batchSize;
   }
   allLeads = allRows;
   populateStateFilter();
   applyFilters();
-  updateTabLeadsCount();
 }
 
 function populateAdminFilters() {
@@ -1656,15 +1463,17 @@ function populateStateFilter() {
 }
 
 function applyFilters() {
-  if (nlSearchActive) return; // NL search controls filteredLeads directly
+  if (nlSearchActive) return;
   const q    = document.getElementById('f-search').value.toLowerCase();
   const par  = document.getElementById('f-partner').value;
   const sta  = document.getElementById('f-status').value;
   const st   = document.getElementById('f-state').value;
-  const from = document.getElementById('f-date-from')?.value || '';
-  const to   = document.getElementById('f-date-to')?.value || '';
+  const from = (document.getElementById('f-date-from')||{value:''}).value;
+  const to   = (document.getElementById('f-date-to')||{value:''}).value;
   filteredLeads = allLeads.filter(l => {
-    if (q   && !(l.merchant||'').toLowerCase().includes(q) && !(l.city||'').toLowerCase().includes(q) && !(l.contact||'').toLowerCase().includes(q)) return false;
+    if (q && !(l.merchant||'').toLowerCase().includes(q) &&
+             !(l.city||'').toLowerCase().includes(q) &&
+             !(l.contact||'').toLowerCase().includes(q)) return false;
     if (par && l.partner_id !== par) return false;
     if (sta && l.status !== sta) return false;
     if (st  && l.state !== st) return false;
@@ -1866,22 +1675,20 @@ function openLeadModal(id) {
   document.getElementById('ld-updater-name').value = currentProfile?.full_name||'';
   onLdStatusChange();
   document.getElementById('modal-lead-detail').classList.add('open');
-  // Add click-to-copy on Phone, POS ID, Lead ID fields
+  // click-to-copy for Phone, POS ID, Lead ID
   setTimeout(() => {
     document.querySelectorAll('#ld-details > div').forEach(div => {
-      const label = div.querySelector('div:first-child')?.textContent?.trim();
-      const valDiv = div.querySelector('div:last-child');
-      if (!valDiv || !label) return;
-      const val = valDiv.textContent?.trim();
-      if (!val || val === '—') return;
-      if (['PHONE','POS ID','LEAD ID'].includes(label)) {
-        valDiv.style.cursor = 'pointer';
-        valDiv.title = 'Click to copy';
-        valDiv.onclick = () => copyToClipboard(val, label);
-        valDiv.innerHTML = '<span style="font-family:monospace;font-size:12px">' + valDiv.textContent + '</span> <span style="color:#94A3B8;font-size:10px">📋</span>';
+      const lbl = div.querySelector('div:first-child')?.textContent?.trim();
+      const val = div.querySelector('div:last-child');
+      if (!lbl || !val || val.textContent.trim() === '—') return;
+      if (['PHONE','POS ID','LEAD ID'].includes(lbl)) {
+        val.style.cursor = 'pointer';
+        val.title = 'Click to copy';
+        const txt = val.textContent.trim();
+        val.onclick = () => { navigator.clipboard.writeText(txt).catch(()=>{}); toast('Copied ✓','success'); };
       }
     });
-  }, 50);
+  }, 60);
 }
 
 function onLdStatusChange() {
@@ -2099,8 +1906,6 @@ async function submitLead() {
   const city     = document.getElementById('nl-city').value.trim();
   const state    = document.getElementById('nl-state').value;
   if (!merchant||!contact||!phone||!city||!state) { toast('Please fill in all required fields','error'); return; }
-  const _submitBtn = document.querySelector('#view-partner .btn-primary[onclick="submitLead()"]');
-  if (_submitBtn) { _submitBtn.textContent='⏳ Submitting…'; _submitBtn.disabled=true; }
   const idType   = document.getElementById('nl-id-type').value;
   const idNumber = document.getElementById('nl-id-number').value.trim();
   const {error} = await sb.from('leads').insert({
@@ -2117,14 +1922,12 @@ async function submitLead() {
     lead_source:   'Partner App',
     ic:            (function(){var pin=document.getElementById('nl-pincode').value.trim();var idx=PINCODE_SH[parseInt(pin)];return idx!==undefined?SH_NAMES[idx]:''})()
   });
-  if (error) { toast('Error: '+error.message,'error'); if (_submitBtn) { _submitBtn.textContent='Submit Lead'; _submitBtn.disabled=false; } return; }
+  if (error) { toast('Error: '+error.message,'error'); return; }
   toast('Lead submitted successfully! ✓','success');
   ['nl-merchant','nl-contact','nl-phone','nl-city','nl-pincode','nl-address','nl-remarks','nl-id-number'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('nl-state').value='';
   document.getElementById('nl-id-type').value='';
   document.getElementById('nl-id-input-wrap').style.display='none';
-  document.getElementById('nl-sh-display').textContent='';
-  if (_submitBtn) { _submitBtn.textContent='Submit Lead'; _submitBtn.disabled=false; }
   loadPartnerLeads();
 }
 
@@ -2508,7 +2311,7 @@ function clearNLSearch() {
   document.getElementById('regular-filters').style.opacity = '1';
   document.getElementById('regular-filters').style.pointerEvents = 'auto';
   nlSearchActive = false;
-  applyFilters(); // this now includes updateQuickStats
+  applyFilters(); // now includes updateQuickStats
 }
 
 // ── MODALS ────────────────────────────────────────
@@ -2523,214 +2326,19 @@ document.getElementById('login-pass').addEventListener('keydown', e=>{ if(e.key=
 
 
 // ══════════════════════════════════════════════════
-//  ENHANCED FEATURES — Added by refactor
+//  NEW FEATURES — SIGNUP, EXPORT, QUICK STATS
 // ══════════════════════════════════════════════════
 
-// ── EXPORT LEADS TO CSV ───────────────────────────────────────────────
-function exportLeadsCSV() {
-  const leads = filteredLeads.length ? filteredLeads : allLeads;
-  if (!leads.length) { toast('No leads to export','error'); return; }
-  const headers = ['#','Merchant','Contact','Phone','City','State','Pincode','Partner','State Head','Status','POS ID','Date Submitted','Address','Remarks'];
-  const rows = leads.map((l,i) => {
-    const pName = partnerMap[l.partner_id]?.name || l.partner_id || '';
-    const date  = l.created_at ? l.created_at.slice(0,10) : '';
-    return [
-      i+1, l.merchant||'', l.contact||'', l.phone||'',
-      l.city||'', l.state||'', l.pincode||'', pName,
-      l.ic||'', l.status||'New', l.pos_id||'', date,
-      (l.address||'').replace(/\n/g,' '), l.remarks||''
-    ].map(v => '"'+String(v).replace(/"/g,'""')+'"').join(',');
-  });
-  const csv = [headers.join(','), ...rows].join('\n');
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csv);
-  a.download = 'leads_export_' + new Date().toISOString().slice(0,10) + '.csv';
-  a.click();
-  toast('Exported ' + leads.length + ' leads to CSV ✓','success');
-}
-
-// ── PRINT LEADS ───────────────────────────────────────────────────────
-function printLeads() {
-  const leads = filteredLeads.length ? filteredLeads : allLeads;
-  if (!leads.length) { toast('No leads to print','error'); return; }
-  const tableRows = leads.map((l,i) => {
-    const pName = partnerMap[l.partner_id]?.name || l.partner_id || '—';
-    const date  = l.created_at ? l.created_at.slice(0,10) : '—';
-    return `<tr>
-      <td>${i+1}</td><td>${esc(l.merchant||'')}</td>
-      <td>${esc(l.city||'—')}, ${esc(l.state||'—')}</td>
-      <td>${esc(l.phone||'—')}</td><td>${esc(pName)}</td>
-      <td>${esc(l.status||'New')}</td><td>${date}</td>
-    </tr>`;
-  }).join('');
-  const win = window.open('', '_blank');
-  win.document.write(`<!DOCTYPE html><html><head><title>Pine Labs Leads Export</title>
-  <style>
-    body{font-family:Arial,sans-serif;font-size:11px;color:#111}
-    h2{font-size:14px;margin-bottom:6px}
-    .sub{font-size:10px;color:#666;margin-bottom:14px}
-    table{width:100%;border-collapse:collapse}
-    th{background:#1B2B6B;color:#fff;padding:6px 8px;text-align:left;font-size:10px}
-    td{padding:5px 8px;border-bottom:1px solid #eee;font-size:10px}
-    tr:nth-child(even)td{background:#F8FAFC}
-    @media print{@page{margin:1cm}}
-  </style></head><body>
-  <h2>Pine Labs Partner Portal — Leads Report</h2>
-  <div class="sub">Exported: ${new Date().toLocaleString('en-IN')} &nbsp;·&nbsp; Total: ${leads.length} leads &nbsp;·&nbsp; Filters: ${document.getElementById('f-search').value||'None'}</div>
-  <table><thead><tr><th>#</th><th>Merchant</th><th>Location</th><th>Phone</th><th>Partner</th><th>Status</th><th>Date</th></tr></thead>
-  <tbody>${tableRows}</tbody></table>
-  <script>window.onload=function(){window.print()}<\/script>
-  </body></html>`);
-  win.document.close();
-}
-
-// Date range filter merged into applyFilters below
-
-// ── QUICK STATS BAR ──────────────────────────────────────────────────
-function updateQuickStats() {
-  const bar = document.getElementById('quick-stats-bar');
-  if (!bar) return;
-  const leads = filteredLeads;
-  if (!leads.length) { bar.style.display='none'; return; }
-  bar.style.display = 'flex';
-  const conv = leads.filter(l=>l.status==='Converted').length;
-  const wip  = leads.filter(l=>l.status==='Work In Progress').length;
-  const nw   = leads.filter(l=>l.status==='New').length;
-  const rate = leads.length ? Math.round(conv/leads.length*100) : 0;
-  document.getElementById('qs-total').textContent = leads.length;
-  document.getElementById('qs-conv').textContent  = conv;
-  document.getElementById('qs-wip').textContent   = wip;
-  document.getElementById('qs-new').textContent   = nw;
-  document.getElementById('qs-rate').textContent  = `Conv. Rate: ${rate}%`;
-}
-
-// ── CLEAR DATE RANGE ──────────────────────────────────────────────────
-function clearDateRange() {
-  const fd = document.getElementById('f-date-from');
-  const td = document.getElementById('f-date-to');
-  if (fd) fd.value = '';
-  if (td) td.value = '';
-  applyFilters();
-}
-
-// ── COPY TO CLIPBOARD UTILITY ─────────────────────────────────────────
-function copyToClipboard(text, label) {
-  navigator.clipboard.writeText(text).then(() => {
-    toast((label||'Copied') + ' ✓', 'success');
-  }).catch(() => {
-    const ta = document.createElement('textarea');
-    ta.value = text; document.body.appendChild(ta);
-    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-    toast((label||'Copied') + ' ✓', 'success');
-  });
-}
-
-// ── KEYBOARD SHORTCUTS ────────────────────────────────────────────────
-document.addEventListener('keydown', function(e) {
-  // Ctrl/Cmd + E → Export CSV (when on leads tab)
-  if ((e.ctrlKey||e.metaKey) && e.key==='e') {
-    e.preventDefault();
-    const leadsTab = document.getElementById('atab-leads');
-    if (leadsTab && leadsTab.classList.contains('active')) exportLeadsCSV();
-  }
-  // Ctrl/Cmd + P → Print
-  if ((e.ctrlKey||e.metaKey) && e.key==='p' && !e.shiftKey) {
-    const leadsTab = document.getElementById('atab-leads');
-    if (leadsTab && leadsTab.classList.contains('active')) {
-      e.preventDefault();
-      printLeads();
-    }
-  }
-  // Escape → close any open modal
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));
-  }
-});
-
-// copy-button logic merged into original openLeadModal below
-
-// renderPartnerLeads override removed (was a no-op)
-
-// ── SMART SEARCH AUTO-COMPLETE HINTS ─────────────────────────────────
-document.addEventListener('DOMContentLoaded', function() {
-  const nlInput = document.getElementById('nl-query');
-  if (!nlInput) return;
-  const hints = [
-    'PetPooja WIP leads in Maharashtra',
-    'Converted leads this month',
-    'New leads no IC assigned',
-    'Leads not updated in 7 days',
-    'Work In Progress Karnataka',
-    'Converted today',
-  ];
-  let hintIdx = 0;
-  setInterval(() => {
-    if (document.activeElement !== nlInput && !nlInput.value) {
-      nlInput.placeholder = hints[hintIdx % hints.length];
-      hintIdx++;
-    }
-  }, 3000);
-});
-
-// ── ADD KEYBOARD SHORTCUT TOOLTIP TO EXPORT BTNS ─────────────────────
-setTimeout(() => {
-  const expBtn = document.querySelector('.export-btn.export-btn-csv');
-  if (expBtn) expBtn.title = 'Export to CSV (Ctrl+E)';
-}, 500);
-
-// renderLeadsTable override removed — updateQuickStats now in applyFilters
-
-// submitLead wrapper removed — animation handled inline
-
-
-
-// Session lead counter
-let sessionLeadCount = 0;
-
-// ── CLEAR ALL FILTERS ─────────────────────────────────────────────────
-function clearAllFilters() {
-  document.getElementById('f-search').value = '';
-  document.getElementById('f-partner').value = '';
-  document.getElementById('f-status').value = '';
-  document.getElementById('f-state').value = '';
-  const fd = document.getElementById('f-date-from');
-  const td = document.getElementById('f-date-to');
-  if (fd) fd.value = '';
-  if (td) td.value = '';
-  const nlQ = document.getElementById('nl-query');
-  if (nlQ && nlQ.value) clearNLSearch();
-  nlSearchActive = false;
-  const rf = document.getElementById('regular-filters');
-  if (rf) { rf.style.opacity='1'; rf.style.pointerEvents='auto'; }
-  applyFilters();
-  toast('Filters cleared', '');
-}
-
-// ── UPDATE TAB COUNT ──────────────────────────────────────────────────
-function updateTabLeadsCount() {
-  const el = document.getElementById('tab-leads-count');
-  if (el) el.textContent = allLeads.length > 0 ? allLeads.length : '';
-}
-
-// loadLeads override removed — updateTabLeadsCount is now inline
-
-
-
-// ══════════════════════════════════════════════════
-//  SIGNUP FEATURE
-// ══════════════════════════════════════════════════
-
-// ── VIEW SWITCHING ────────────────────────────────
+// ── SIGNUP VIEW NAVIGATION ────────────────────────
 function showSignup() {
-  document.getElementById('view-login').style.display  = 'none';
-  document.getElementById('view-admin').style.display  = 'none';
-  document.getElementById('view-partner').style.display= 'none';
+  ['view-login','view-admin','view-partner'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
   document.getElementById('view-signup').style.display = 'flex';
-  // Reset form state
   spGoStep(1);
   document.getElementById('signup-err').style.display = 'none';
   ['sp-company','sp-email','sp-phone','sp-contact','sp-designation','sp-website',
-   'sp-type','sp-segment','sp-merchant-count','sp-geography','sp-about',
+   'sp-type','sp-segment','sp-merchants','sp-geography','sp-about',
    'sp-pass','sp-pass2','sp-type-other'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = '';
@@ -2743,477 +2351,330 @@ function showLogin() {
   showView('login');
 }
 
-// showView already handles signup hiding — override removed
-
-// ── STEP NAVIGATION ───────────────────────────────
+// ── SIGNUP STEP CONTROL ───────────────────────────
 function spGoStep(n) {
   [1,2,3,'success'].forEach(s => {
     const el = document.getElementById('sp-step-' + s);
     if (el) el.classList.toggle('active', s === n);
   });
-  const bars = [1,2,3];
-  bars.forEach(i => {
+  [1,2,3].forEach(i => {
     const bar = document.getElementById('sp-bar-' + i);
     if (!bar) return;
-    bar.classList.remove('done','active');
-    if (typeof n === 'number') {
-      if (i < n) bar.classList.add('done');
-      else if (i === n) bar.classList.add('active');
-    } else {
-      bar.classList.add('done'); // success = all done
-    }
+    bar.className = 'sp-bar' + (i < n ? ' done' : i === n ? ' active' : '');
   });
   const labels = {1:'Step 1 of 3 · Company Details', 2:'Step 2 of 3 · Company Profile', 3:'Step 3 of 3 · Set Password'};
-  const labelEl = document.getElementById('sp-step-label');
-  if (labelEl) labelEl.textContent = labels[n] || '';
+  const lbl = document.getElementById('sp-step-label');
+  if (lbl) lbl.textContent = labels[n] || '';
 }
 
 function spNext(step) {
   const err = document.getElementById('signup-err');
   err.style.display = 'none';
-
   if (step === 1) {
-    const company = document.getElementById('sp-company').value.trim();
-    const email   = document.getElementById('sp-email').value.trim();
-    const phone   = document.getElementById('sp-phone').value.trim();
-    const contact = document.getElementById('sp-contact').value.trim();
-    if (!company || !email || !phone || !contact) {
-      err.textContent = 'Please fill in all required fields.';
-      err.style.display = 'block';
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      err.textContent = 'Please enter a valid email address.';
-      err.style.display = 'block';
-      return;
-    }
+    const co = document.getElementById('sp-company').value.trim();
+    const em = document.getElementById('sp-email').value.trim();
+    const ph = document.getElementById('sp-phone').value.trim();
+    const cn = document.getElementById('sp-contact').value.trim();
+    if (!co || !em || !ph || !cn) { err.textContent='Please fill all required fields.'; err.style.display='block'; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { err.textContent='Please enter a valid email address.'; err.style.display='block'; return; }
     spGoStep(2);
   } else if (step === 2) {
-    const type    = document.getElementById('sp-type').value;
-    const segment = document.getElementById('sp-segment').value;
-    const about   = document.getElementById('sp-about').value.trim();
-    const typeOther = document.getElementById('sp-type-other').value.trim();
-    if (!type || !segment || !about) {
-      err.textContent = 'Please fill in all required fields.';
-      err.style.display = 'block';
-      return;
-    }
-    if (type === 'Others' && !typeOther) {
-      err.textContent = 'Please specify your company type.';
-      err.style.display = 'block';
-      return;
-    }
+    const ty = document.getElementById('sp-type').value;
+    const sg = document.getElementById('sp-segment').value;
+    const ab = document.getElementById('sp-about').value.trim();
+    const to = document.getElementById('sp-type-other').value.trim();
+    if (!ty || !sg || !ab) { err.textContent='Please fill all required fields.'; err.style.display='block'; return; }
+    if (ty === 'Others' && !to) { err.textContent='Please specify your company type.'; err.style.display='block'; return; }
     spGoStep(3);
   }
 }
 
 function spBack(step) {
-  spGoStep(step - 1);
   document.getElementById('signup-err').style.display = 'none';
+  spGoStep(step - 1);
 }
 
-// Show/hide "specify type" field
-document.addEventListener('change', function(e) {
-  if (e.target && e.target.id === 'sp-type') {
-    const wrap = document.getElementById('sp-type-other-wrap');
-    if (wrap) wrap.style.display = e.target.value === 'Others' ? 'block' : 'none';
-  }
-});
-
-// Password strength hint
 function spCheckPass() {
   const p1 = document.getElementById('sp-pass').value;
   const p2 = document.getElementById('sp-pass2').value;
   const hint = document.getElementById('sp-pass-hint');
-  if (!p1) { hint.textContent = ''; return; }
-  if (p1.length < 8) {
-    hint.textContent = '⚠ Password must be at least 8 characters';
-    hint.style.color = '#DC2626';
-    return;
-  }
-  if (p2 && p1 !== p2) {
-    hint.textContent = '✗ Passwords do not match';
-    hint.style.color = '#DC2626';
-    return;
-  }
-  if (p2 && p1 === p2) {
-    hint.textContent = '✓ Passwords match';
-    hint.style.color = '#059669';
-    return;
-  }
-  hint.textContent = '✓ Looks good';
+  if (!p1) { hint.textContent=''; return; }
+  if (p1.length < 8) { hint.textContent='⚠ Min. 8 characters'; hint.style.color='#DC2626'; return; }
+  if (p2 && p1 !== p2) { hint.textContent='✗ Passwords do not match'; hint.style.color='#DC2626'; return; }
+  hint.textContent = (p2 && p1===p2) ? '✓ Passwords match' : '✓ Good';
   hint.style.color = '#059669';
 }
 
-// ── SUBMIT SIGNUP ─────────────────────────────────
 async function submitSignup() {
   const err = document.getElementById('signup-err');
   err.style.display = 'none';
-
-  const pass  = document.getElementById('sp-pass').value;
+  const pass = document.getElementById('sp-pass').value;
   const pass2 = document.getElementById('sp-pass2').value;
-  if (pass.length < 8) {
-    err.textContent = 'Password must be at least 8 characters.';
-    err.style.display = 'block'; return;
-  }
-  if (pass !== pass2) {
-    err.textContent = 'Passwords do not match.';
-    err.style.display = 'block'; return;
-  }
+  if (pass.length < 8) { err.textContent='Password must be at least 8 characters.'; err.style.display='block'; return; }
+  if (pass !== pass2) { err.textContent='Passwords do not match.'; err.style.display='block'; return; }
 
   const btn = document.getElementById('sp-submit-btn');
   btn.textContent = '⏳ Submitting…'; btn.disabled = true;
 
-  const company    = document.getElementById('sp-company').value.trim();
-  const email      = document.getElementById('sp-email').value.trim();
-  const phone      = document.getElementById('sp-phone').value.trim();
-  const contact    = document.getElementById('sp-contact').value.trim();
-  const designation= document.getElementById('sp-designation').value.trim();
-  const website    = document.getElementById('sp-website').value.trim();
-  const compType   = document.getElementById('sp-type').value;
-  const typeOther  = document.getElementById('sp-type-other').value.trim();
-  const segment    = document.getElementById('sp-segment').value;
-  const merchants  = document.getElementById('sp-merchant-count').value;
-  const geography  = document.getElementById('sp-geography').value.trim();
-  const about      = document.getElementById('sp-about').value.trim();
-
-  const finalType  = compType === 'Others' ? typeOther : compType;
+  const email     = document.getElementById('sp-email').value.trim();
+  const company   = document.getElementById('sp-company').value.trim();
+  const phone     = document.getElementById('sp-phone').value.trim();
+  const contact   = document.getElementById('sp-contact').value.trim();
+  const desig     = document.getElementById('sp-designation').value.trim();
+  const website   = document.getElementById('sp-website').value.trim();
+  const compType  = document.getElementById('sp-type').value;
+  const typeOther = document.getElementById('sp-type-other').value.trim();
+  const segment   = document.getElementById('sp-segment').value;
+  const merchants = document.getElementById('sp-merchants').value;
+  const geography = document.getElementById('sp-geography').value.trim();
+  const about     = document.getElementById('sp-about').value.trim();
+  const finalType = compType === 'Others' ? typeOther : compType;
 
   try {
-    // 1. Check if email already has a pending/approved signup request
-    const { data: existing } = await sb
-      .from('partner_signups')
-      .select('id, status')
-      .eq('email', email)
-      .in('status', ['pending', 'approved']);
-
+    // Check duplicate
+    const { data: existing } = await sb.from('partner_signups').select('id,status').eq('email', email).in('status',['pending','approved']);
     if (existing && existing.length > 0) {
-      const st = existing[0].status;
-      if (st === 'approved') {
-        err.textContent = 'This email is already registered. Please sign in.';
-      } else {
-        err.textContent = 'A signup request with this email is already under review.';
-      }
+      err.textContent = existing[0].status === 'approved'
+        ? 'This email is already registered. Please sign in.'
+        : 'A request with this email is already under review.';
       err.style.display = 'block';
       btn.textContent = 'Submit Application'; btn.disabled = false;
       return;
     }
 
-    // 2. Create auth user in Supabase (disabled by default — status pending)
-    const { data: authData, error: authError } = await sb.auth.signUp({
-      email,
-      password: pass,
-      options: {
-        data: {
-          full_name: contact,
-          company: company,
-          signup_pending: true
-        }
-      }
+    // Create auth user
+    const { data: authData, error: authErr } = await sb.auth.signUp({
+      email, password: pass,
+      options: { data: { full_name: contact, company, signup_pending: true } }
     });
-
-    if (authError) {
-      err.textContent = 'Auth error: ' + authError.message;
+    if (authErr) {
+      err.textContent = 'Auth error: ' + authErr.message;
       err.style.display = 'block';
       btn.textContent = 'Submit Application'; btn.disabled = false;
       return;
     }
 
-    const userId = authData?.user?.id || null;
-
-    // 3. Insert signup request record
-    const { error: insertError } = await sb.from('partner_signups').insert({
-      user_id:     userId,
-      company_name: company,
-      email,
-      phone,
-      contact_name: contact,
-      designation,
-      website,
-      company_type: finalType,
-      segment,
-      merchant_count: merchants,
-      geography,
-      about,
-      status:      'pending',
-      created_at:  new Date().toISOString()
+    // Insert signup record
+    const { error: insErr } = await sb.from('partner_signups').insert({
+      user_id: authData?.user?.id || null,
+      company_name: company, email, phone,
+      contact_name: contact, designation: desig, website,
+      company_type: finalType, segment,
+      merchant_count: merchants, geography, about,
+      status: 'pending', created_at: new Date().toISOString()
     });
+    if (insErr) console.warn('Signup insert error:', insErr.message);
 
-    if (insertError) {
-      // If insert fails (table may not exist yet), still show success to user
-      // and log the error — the data will be in auth.users metadata
-      console.warn('partner_signups insert error:', insertError.message);
-      // Don't block UX — admin can still see new auth users
-    }
-
-    // 4. Show success
+    // Show success
     document.getElementById('sp-confirm-email').textContent = email;
     spGoStep('success');
 
-    // 5. Notify admin via Google Apps Script (best-effort)
-    try {
-      const notifyUrl = WEBAPP_URL
-        + '?action=notifyAdminSignup'
-        + '&company='   + encodeURIComponent(company)
-        + '&email='     + encodeURIComponent(email)
-        + '&phone='     + encodeURIComponent(phone)
-        + '&contact='   + encodeURIComponent(contact)
-        + '&type='      + encodeURIComponent(finalType)
-        + '&segment='   + encodeURIComponent(segment);
-      fetch(notifyUrl).catch(() => {});
-    } catch(_) {}
+    // Notify admin (best-effort)
+    fetch(WEBAPP_URL + '?action=notifyAdminSignup' +
+      '&company=' + encodeURIComponent(company) +
+      '&email='   + encodeURIComponent(email) +
+      '&phone='   + encodeURIComponent(phone) +
+      '&contact=' + encodeURIComponent(contact) +
+      '&type='    + encodeURIComponent(finalType) +
+      '&segment=' + encodeURIComponent(segment)
+    ).catch(() => {});
 
   } catch(e) {
-    err.textContent = 'Unexpected error: ' + e.message;
+    err.textContent = 'Error: ' + e.message;
     err.style.display = 'block';
     btn.textContent = 'Submit Application'; btn.disabled = false;
   }
 }
 
-
-// ══════════════════════════════════════════════════
-//  ADMIN — PARTNER SIGNUPS TAB
-// ══════════════════════════════════════════════════
-
-let allSignups = [];
-let filteredSignups = [];
+// ── ADMIN SIGNUPS TAB ─────────────────────────────
+let allSignups = [], filteredSignups = [];
 
 async function loadSignups() {
   document.getElementById('su-list').innerHTML = '<div class="loading"><div class="spinner"></div>Loading…</div>';
-  const { data, error } = await sb
-    .from('partner_signups')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    document.getElementById('su-list').innerHTML =
-      `<div style="color:#DC2626;font-size:12px;padding:20px">Error: ${error.message}</div>`;
-    return;
-  }
-
+  const { data, error } = await sb.from('partner_signups').select('*').order('created_at',{ascending:false});
+  if (error) { document.getElementById('su-list').innerHTML = '<div style="color:#DC2626;padding:20px;font-size:12px">Error: ' + error.message + '</div>'; return; }
   allSignups = data || [];
   updateSignupCounts();
   filterSignups();
-  updateSignupTabBadge();
+  updateSignupBadge();
 }
 
 function updateSignupCounts() {
-  const pending  = allSignups.filter(s => s.status === 'pending').length;
-  const approved = allSignups.filter(s => s.status === 'approved').length;
-  const rejected = allSignups.filter(s => s.status === 'rejected').length;
-  document.getElementById('su-count-pending').textContent  = pending;
-  document.getElementById('su-count-approved').textContent = approved;
-  document.getElementById('su-count-rejected').textContent = rejected;
+  document.getElementById('su-count-pending').textContent  = allSignups.filter(s=>s.status==='pending').length;
+  document.getElementById('su-count-approved').textContent = allSignups.filter(s=>s.status==='approved').length;
+  document.getElementById('su-count-rejected').textContent = allSignups.filter(s=>s.status==='rejected').length;
 }
 
-function updateSignupTabBadge() {
-  const pending = allSignups.filter(s => s.status === 'pending').length;
-  const badge = document.getElementById('tab-signups-count');
+function updateSignupBadge() {
+  const n = allSignups.filter(s=>s.status==='pending').length;
+  const badge = document.getElementById('tab-signups-badge');
   if (!badge) return;
-  if (pending > 0) {
-    badge.textContent = pending + ' new';
-    badge.style.display = 'inline';
-  } else {
-    badge.style.display = 'none';
-  }
+  if (n > 0) { badge.textContent = n + ' new'; badge.style.display = 'inline'; }
+  else badge.style.display = 'none';
+}
+
+async function loadSignupCountBadge() {
+  try {
+    const { data } = await sb.from('partner_signups').select('id').eq('status','pending');
+    const n = (data||[]).length;
+    const badge = document.getElementById('tab-signups-badge');
+    if (badge && n > 0) { badge.textContent = n + ' new'; badge.style.display = 'inline'; }
+  } catch(_) {}
 }
 
 function filterSignups() {
-  const filter = (document.getElementById('su-filter') || {value:''}).value;
-  filteredSignups = filter ? allSignups.filter(s => s.status === filter) : allSignups;
+  const f = (document.getElementById('su-filter')||{value:''}).value;
+  filteredSignups = f ? allSignups.filter(s=>s.status===f) : allSignups;
   renderSignupList();
 }
 
 function renderSignupList() {
-  const container = document.getElementById('su-list');
-  if (!filteredSignups.length) {
-    container.innerHTML = '<div style="text-align:center;padding:40px;color:#94A3B8;font-size:13px">No signup requests found.</div>';
-    return;
-  }
-
-  container.innerHTML = filteredSignups.map(s => {
-    const date = s.created_at ? new Date(s.created_at).toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'}) : '—';
-    const badgeClass = s.status === 'approved' ? 'signup-badge-approved' : s.status === 'rejected' ? 'signup-badge-rejected' : 'signup-badge-pending';
-    const badgeLabel = s.status === 'approved' ? '✓ Approved' : s.status === 'rejected' ? '✗ Rejected' : '⏳ Pending';
-    const isPending  = s.status === 'pending';
-
-    return `<div class="signup-req-card ${s.status}" id="su-card-${esc(s.id)}">
-      <div style="display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap">
-        <!-- Left: Company initial -->
-        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#1B2B6B,#2D3E9E);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0">
-          ${esc((s.company_name||'?').charAt(0).toUpperCase())}
-        </div>
-        <!-- Middle: Details -->
-        <div style="flex:1;min-width:220px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;flex-wrap:wrap">
+  const el = document.getElementById('su-list');
+  if (!filteredSignups.length) { el.innerHTML = '<div style="text-align:center;padding:40px;color:#94A3B8;font-size:13px">No requests found.</div>'; return; }
+  el.innerHTML = filteredSignups.map(s => {
+    const date = s.created_at ? new Date(s.created_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) : '—';
+    const bClass = s.status==='approved' ? 'su-approved' : s.status==='rejected' ? 'su-rejected' : 'su-pending';
+    const bLabel = s.status==='approved' ? '✓ Approved' : s.status==='rejected' ? '✗ Rejected' : '⏳ Pending';
+    const isPending = s.status==='pending';
+    return `<div class="su-card ${s.status}">
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#1B2B6B,#2D3E9E);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0">${esc((s.company_name||'?').charAt(0).toUpperCase())}</div>
+        <div style="flex:1;min-width:180px">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
             <div style="font-size:15px;font-weight:800;color:#1B2B6B">${esc(s.company_name||'—')}</div>
-            <span class="signup-badge ${badgeClass}">${badgeLabel}</span>
+            <span class="su-badge ${bClass}">${bLabel}</span>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px;margin-top:8px">
-            <div style="font-size:11.5px;color:#64748B">👤 ${esc(s.contact_name||'—')} ${s.designation ? '· '+esc(s.designation) : ''}</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:4px">
+            <div style="font-size:11.5px;color:#64748B">👤 ${esc(s.contact_name||'—')}${s.designation?' · '+esc(s.designation):''}</div>
             <div style="font-size:11.5px;color:#64748B">✉ ${esc(s.email||'—')}</div>
             <div style="font-size:11.5px;color:#64748B">📞 ${esc(s.phone||'—')}</div>
             <div style="font-size:11.5px;color:#64748B">🏢 ${esc(s.company_type||'—')}</div>
             <div style="font-size:11.5px;color:#64748B">🎯 ${esc(s.segment||'—')}</div>
-            ${s.merchant_count ? `<div style="font-size:11.5px;color:#64748B">👥 ${esc(s.merchant_count)} merchants</div>` : ''}
-            ${s.geography ? `<div style="font-size:11.5px;color:#64748B">📍 ${esc(s.geography)}</div>` : ''}
-            ${s.website ? `<div style="font-size:11.5px"><a href="${esc(s.website)}" target="_blank" style="color:#2563EB">🌐 Website ↗</a></div>` : ''}
+            ${s.geography?`<div style="font-size:11.5px;color:#64748B">📍 ${esc(s.geography)}</div>`:''}
           </div>
-          ${s.about ? `<div style="margin-top:10px;font-size:12px;color:#475569;background:#F8FAFC;border-radius:6px;padding:8px 10px;border-left:3px solid #E2E8F0;font-style:italic">${esc(s.about)}</div>` : ''}
-          <div style="font-size:10.5px;color:#CBD5E1;margin-top:8px">Submitted ${date}</div>
-          ${s.approved_at ? `<div style="font-size:10.5px;color:#059669;margin-top:2px">✓ Approved on ${new Date(s.approved_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</div>` : ''}
-          ${s.rejected_at ? `<div style="font-size:10.5px;color:#DC2626;margin-top:2px">✗ Rejected on ${new Date(s.rejected_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}${s.reject_reason ? ' · '+esc(s.reject_reason) : ''}</div>` : ''}
+          ${s.about?`<div style="margin-top:8px;font-size:12px;color:#475569;background:#F8FAFC;border-radius:6px;padding:8px 10px;border-left:3px solid #E2E8F0;font-style:italic">${esc(s.about)}</div>`:''}
+          <div style="font-size:10.5px;color:#CBD5E1;margin-top:6px">Submitted ${date}${s.approved_at?' · ✓ Approved '+new Date(s.approved_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}):''}${s.rejected_at?' · ✗ Rejected '+new Date(s.rejected_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+( s.reject_reason?' ('+esc(s.reject_reason)+')'  :'')  :''}</div>
         </div>
-        <!-- Right: Action buttons -->
-        <div style="display:flex;flex-direction:column;gap:8px;min-width:140px">
-          ${isPending ? `
-          <button onclick="approveSignup('${s.id}','${esc(s.email)}','${esc(s.company_name)}')"
-            style="background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;justify-content:center;transition:.15s"
-            onmouseover="this.style.boxShadow='0 4px 12px rgba(5,150,105,.35)'"
-            onmouseout="this.style.boxShadow='none'">
-            ✓ Approve & Send Email
-          </button>
-          <button onclick="rejectSignup('${s.id}','${esc(s.email)}','${esc(s.company_name)}')"
-            style="background:#FEF2F2;color:#DC2626;border:1px solid #FECACA;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer">
-            ✗ Reject
-          </button>
-          ` : ''}
-          <button onclick="copyToClipboard('${esc(s.email)}','Email')"
-            style="background:#F8FAFC;color:#64748B;border:1px solid #E2E8F0;border-radius:8px;padding:6px 12px;font-size:11px;cursor:pointer">
-            📋 Copy Email
-          </button>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:130px">
+          ${isPending?`<button onclick="approveSignup('${s.id}','${esc(s.email)}','${esc(s.company_name)}')" style="background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;border-radius:8px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer">✓ Approve &amp; Email</button>
+          <button onclick="rejectSignup('${s.id}')" style="background:#FEF2F2;color:#DC2626;border:1px solid #FECACA;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer">✗ Reject</button>`:''}
+          <button onclick="navigator.clipboard.writeText('${esc(s.email)}').then(()=>toast('Copied ✓','success'))" style="background:#F8FAFC;color:#64748B;border:1px solid #E2E8F0;border-radius:8px;padding:6px 10px;font-size:11px;cursor:pointer">📋 Copy Email</button>
         </div>
       </div>
     </div>`;
   }).join('');
 }
 
-// ── APPROVE SIGNUP ─────────────────────────────────
 async function approveSignup(id, email, companyName) {
-  if (!confirm(`Approve signup for ${companyName} (${email})?\n\nAn approval email will be sent to them automatically.`)) return;
+  if (!confirm('Approve ' + companyName + ' (' + email + ')?\n\nA welcome email will be sent to them.')) return;
 
-  const card = document.getElementById('su-card-' + id);
-  if (card) card.style.opacity = '0.5';
+  // Create partner record
+  const pid = companyName.toLowerCase().replace(/[^a-z0-9]/g,'_').replace(/__+/g,'_').slice(0,30);
+  const initials = companyName.split(' ').filter(Boolean).map(w=>w[0]).join('').toUpperCase().slice(0,3);
+  const colors = ['#1B2B6B','#059669','#D97706','#7C3AED','#0EA5E9'];
+  await sb.from('partners').upsert({ id:pid, name:companyName, initials, color:colors[Math.floor(Math.random()*colors.length)],
+    type: (allSignups.find(s=>s.id===id)||{}).company_type||'' });
 
-  // 1. Create partner record in partners table
-  const partnerId = companyName.toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/__+/g, '_').slice(0, 30);
-  const companyInitials = companyName.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 3);
-  const colors = ['#1B2B6B','#059669','#D97706','#7C3AED','#0EA5E9','#EF4444','#F59E0B'];
-  const partnerColor = colors[Math.floor(Math.random() * colors.length)];
-
-  const { error: partnerErr } = await sb.from('partners').upsert({
-    id: partnerId,
-    name: companyName,
-    initials: companyInitials,
-    color: partnerColor,
-    type: allSignups.find(s => s.id === id)?.company_type || ''
-  });
-
-  if (partnerErr) {
-    console.warn('Partner upsert error:', partnerErr.message);
-  }
-
-  // 2. Find the user by email in profiles and assign partner role
-  const { data: profiles } = await sb.from('profiles').select('id').eq('email', email);
-  if (profiles && profiles.length > 0) {
-    const userId = profiles[0].id;
-    await sb.from('profiles').update({
-      role: 'partner',
-      partner_id: partnerId,
-      is_poc: true
-    }).eq('id', userId);
-  } else {
-    // Try via the RPC if profile doesn't exist yet (user may not have confirmed email)
-    try {
-      await sb.rpc('assign_user_role', {
-        p_email: email,
-        p_role: 'partner',
-        p_partner_id: partnerId,
-        p_is_poc: true
-      });
-    } catch(_) {}
-  }
-
-  // 3. Update the signup record
-  const now = new Date().toISOString();
-  const { error: updateErr } = await sb.from('partner_signups').update({
-    status: 'approved',
-    approved_at: now,
-    partner_id: partnerId
-  }).eq('id', id);
-
-  if (updateErr) { toast('Error updating record: ' + updateErr.message, 'error'); if (card) card.style.opacity='1'; return; }
-
-  // 4. Send approval email via Google Apps Script
+  // Assign role via RPC
   try {
-    const signup = allSignups.find(s => s.id === id) || {};
-    const approvalUrl = WEBAPP_URL
-      + '?action=sendApprovalEmail'
-      + '&to='      + encodeURIComponent(email)
-      + '&company=' + encodeURIComponent(companyName)
-      + '&contact=' + encodeURIComponent(signup.contact_name || '')
-      + '&partnerId='+ encodeURIComponent(partnerId);
-    const res = await fetch(approvalUrl);
-    const result = await res.json().catch(() => ({}));
-    if (result.success) {
-      toast('✓ Approved & welcome email sent to ' + email, 'success');
-    } else {
-      toast('Approved ✓ (Email send may have failed — check Apps Script)', 'success');
-    }
-  } catch(_) {
-    toast('Approved ✓ (Email delivery check: verify Apps Script)', 'success');
-  }
+    await sb.rpc('assign_user_role',{p_email:email,p_role:'partner',p_partner_id:pid,p_is_poc:true});
+  } catch(_) {}
 
-  // 5. Update local state & re-render
-  const idx = allSignups.findIndex(s => s.id === id);
-  if (idx >= 0) { allSignups[idx].status = 'approved'; allSignups[idx].approved_at = now; }
-  updateSignupCounts();
-  filterSignups();
-  updateSignupTabBadge();
-  await loadPartnerMap();
-  loadPartnerGrid();
+  // Update signup record
+  const now = new Date().toISOString();
+  const { error } = await sb.from('partner_signups').update({status:'approved',approved_at:now,partner_id:pid}).eq('id',id);
+  if (error) { toast('Error: '+error.message,'error'); return; }
+
+  // Send approval email
+  try {
+    const signup = allSignups.find(s=>s.id===id)||{};
+    const res = await fetch(WEBAPP_URL+'?action=sendApprovalEmail&to='+encodeURIComponent(email)+'&company='+encodeURIComponent(companyName)+'&contact='+encodeURIComponent(signup.contact_name||'')+'&partnerId='+encodeURIComponent(pid));
+    const r = await res.json().catch(()=>({}));
+    toast(r.success ? '✓ Approved & welcome email sent to '+email : 'Approved ✓ (check email delivery)','success');
+  } catch(_) { toast('Approved ✓','success'); }
+
+  const idx = allSignups.findIndex(s=>s.id===id);
+  if (idx>=0) { allSignups[idx].status='approved'; allSignups[idx].approved_at=now; }
+  updateSignupCounts(); filterSignups(); updateSignupBadge();
+  await loadPartnerMap(); loadPartnerGrid();
 }
 
-// ── REJECT SIGNUP ──────────────────────────────────
-async function rejectSignup(id, email, companyName) {
-  const reason = prompt(`Reject signup for ${companyName}?\n\nOptional: enter a reason (not sent to applicant by default):`);
-  if (reason === null) return; // cancelled
-
-  const { error } = await sb.from('partner_signups').update({
-    status: 'rejected',
-    rejected_at: new Date().toISOString(),
-    reject_reason: reason.trim() || null
-  }).eq('id', id);
-
-  if (error) { toast('Error: ' + error.message, 'error'); return; }
-
-  const idx = allSignups.findIndex(s => s.id === id);
-  if (idx >= 0) {
-    allSignups[idx].status = 'rejected';
-    allSignups[idx].rejected_at = new Date().toISOString();
-    allSignups[idx].reject_reason = reason.trim() || null;
-  }
-  updateSignupCounts();
-  filterSignups();
-  updateSignupTabBadge();
-  toast('Signup rejected', '');
+async function rejectSignup(id) {
+  const reason = prompt('Reject this signup?\n\nOptional reason (internal only):');
+  if (reason === null) return;
+  const now = new Date().toISOString();
+  const { error } = await sb.from('partner_signups').update({status:'rejected',rejected_at:now,reject_reason:reason.trim()||null}).eq('id',id);
+  if (error) { toast('Error: '+error.message,'error'); return; }
+  const idx = allSignups.findIndex(s=>s.id===id);
+  if (idx>=0) { allSignups[idx].status='rejected'; allSignups[idx].rejected_at=now; allSignups[idx].reject_reason=reason.trim()||null; }
+  updateSignupCounts(); filterSignups(); updateSignupBadge();
+  toast('Signup rejected','');
 }
 
-// adminTab signups patch merged into original
-
-// ── LOAD SIGNUP COUNT ON ADMIN LOAD ──────────────
-async function loadSignupCount() {
-  const { data } = await sb.from('partner_signups').select('id').eq('status', 'pending');
-  const count = (data || []).length;
-  const badge = document.getElementById('tab-signups-count');
-  if (badge && count > 0) {
-    badge.textContent = count + ' new';
-    badge.style.display = 'inline';
-  }
+// ── QUICK STATS ───────────────────────────────────
+function updateQuickStats() {
+  const bar = document.getElementById('quick-stats');
+  if (!bar || !filteredLeads.length) { if(bar) bar.style.display='none'; return; }
+  bar.style.display = 'flex';
+  const conv = filteredLeads.filter(l=>l.status==='Converted').length;
+  const wip  = filteredLeads.filter(l=>l.status==='Work In Progress').length;
+  const nw   = filteredLeads.filter(l=>l.status==='New').length;
+  const rate = Math.round(conv/filteredLeads.length*100);
+  document.getElementById('qs-total').textContent = filteredLeads.length;
+  document.getElementById('qs-conv').textContent  = conv;
+  document.getElementById('qs-wip').textContent   = wip;
+  document.getElementById('qs-new').textContent   = nw;
+  document.getElementById('qs-rate').textContent  = 'Conv Rate: ' + rate + '%';
 }
 
-// loadOverview signup count patch merged into original
+// ── EXPORT TO CSV ─────────────────────────────────
+function exportLeadsCSV() {
+  const leads = filteredLeads.length ? filteredLeads : allLeads;
+  if (!leads.length) { toast('No leads to export','error'); return; }
+  const headers = ['#','Merchant','Contact','Phone','City','State','Partner','State Head','Status','POS ID','Date','Address','Remarks'];
+  const rows = leads.map((l,i) => {
+    const pName = (partnerMap[l.partner_id]||{}).name || l.partner_id || '';
+    return [i+1,l.merchant||'',l.contact||'',l.phone||'',l.city||'',l.state||'',pName,
+            l.ic||'',l.status||'New',l.pos_id||'',l.created_at?l.created_at.slice(0,10):'',
+            (l.address||'').replace(/\n/g,' '),l.remarks||'']
+      .map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',');
+  });
+  const csv = [headers.join(','),...rows].join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csv);
+  a.download = 'leads_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+  toast('Exported ' + leads.length + ' leads ✓','success');
+}
 
+// ── PRINT LEADS ───────────────────────────────────
+function printLeads() {
+  const leads = filteredLeads.length ? filteredLeads : allLeads;
+  if (!leads.length) { toast('No leads to print','error'); return; }
+  const rows = leads.map((l,i) => {
+    const pName = (partnerMap[l.partner_id]||{}).name||'—';
+    return `<tr><td>${i+1}</td><td>${esc(l.merchant||'')}</td><td>${esc(l.city||'—')}, ${esc(l.state||'—')}</td><td>${esc(l.phone||'—')}</td><td>${esc(pName)}</td><td>${esc(l.status||'New')}</td><td>${l.created_at?l.created_at.slice(0,10):'—'}</td></tr>`;
+  }).join('');
+  const w = window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>Leads Export</title><style>body{font-family:Arial,sans-serif;font-size:11px}table{width:100%;border-collapse:collapse}th{background:#1B2B6B;color:#fff;padding:6px 8px;text-align:left;font-size:10px}td{padding:5px 8px;border-bottom:1px solid #eee}tr:nth-child(even)td{background:#F8FAFC}@media print{@page{margin:1cm}}</style></head><body><h3>Pine Labs Partner Leads — ${new Date().toLocaleDateString('en-IN')}</h3><table><thead><tr><th>#</th><th>Merchant</th><th>Location</th><th>Phone</th><th>Partner</th><th>Status</th><th>Date</th></tr></thead><tbody>${rows}</tbody></table><script>window.onload=function(){window.print()}<\/script></body></html>`);
+  w.document.close();
+}
+
+// ── CLEAR ALL FILTERS ─────────────────────────────
+function clearAllFilters() {
+  ['f-search','f-partner','f-status','f-state','f-date-from','f-date-to'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  if (document.getElementById('nl-query')?.value) clearNLSearch();
+  else applyFilters();
+  toast('Filters cleared','');
+}
+
+// Escape key closes modals
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));
+});
 
 </script>
 </body>
