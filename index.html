@@ -717,6 +717,38 @@ textarea{resize:vertical;min-height:70px}
           <div><div style="font-size:11px;color:#475569;font-weight:700">All</div><div style="font-size:10px;color:#94A3B8">Show all</div></div>
         </div>
       </div>
+      <!-- PORTAL ACCESS SECTION -->
+      <div class="card" style="margin-bottom:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+          <div>
+            <div class="card-title" style="margin-bottom:2px">🔑 Current Portal Access</div>
+            <div style="font-size:11.5px;color:#94A3B8">All users who currently have access to the portal</div>
+          </div>
+          <button class="btn btn-ghost btn-sm" onclick="loadPortalUsers()">↻ Refresh</button>
+        </div>
+        <!-- Role count chips -->
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+          <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:8px">
+            <span style="font-size:18px;font-weight:800;color:#1B2B6B" id="pu-count-admin">—</span>
+            <span style="font-size:11px;color:#1E40AF;font-weight:700">Admin</span>
+          </div>
+          <div style="background:#F5F3FF;border:1px solid #DDD6FE;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:8px">
+            <span style="font-size:18px;font-weight:800;color:#7C3AED" id="pu-count-poc">—</span>
+            <span style="font-size:11px;color:#5B21B6;font-weight:700">Partner SPOC</span>
+          </div>
+          <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:8px">
+            <span style="font-size:18px;font-weight:800;color:#059669" id="pu-count-sales">—</span>
+            <span style="font-size:11px;color:#065F46;font-weight:700">Partner Sales</span>
+          </div>
+          <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:8px">
+            <span style="font-size:18px;font-weight:800;color:#334155" id="pu-count-total">—</span>
+            <span style="font-size:11px;color:#64748B;font-weight:700">Total Users</span>
+          </div>
+        </div>
+        <div id="pu-access-list"><div style="text-align:center;padding:20px;color:#94A3B8;font-size:12px">Click Refresh to load users</div></div>
+      </div>
+
+      <!-- SIGNUP REQUESTS -->
       <div id="su-list"><div class="loading"><div class="spinner"></div>Loading…</div></div>
     </div>
 
@@ -2504,6 +2536,7 @@ async function loadSignups() {
   updateSignupCounts();
   filterSignups();
   updateSignupBadge();
+  loadPortalUsers(); // also refresh the access list
 }
 
 function updateSignupCounts() {
@@ -2759,6 +2792,131 @@ function clearAllFilters() {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));
 });
+
+
+
+// ── PORTAL ACCESS — load all users with roles ─────────────────────
+let allPortalUsers = [];
+
+async function loadPortalUsers() {
+  const listEl = document.getElementById('pu-access-list');
+  if (!listEl) return;
+  listEl.innerHTML = '<div class="loading"><div class="spinner"></div>Loading…</div>';
+
+  // Fetch all profiles that have a role assigned
+  const { data, error } = await sb
+    .from('profiles')
+    .select('id, full_name, email, role, is_poc, partner_id, created_at')
+    .not('role', 'is', null)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    listEl.innerHTML = '<div style="color:#DC2626;font-size:12px;padding:12px">Error loading users: ' + error.message + '</div>';
+    return;
+  }
+
+  allPortalUsers = data || [];
+  renderPortalUsers();
+}
+
+function renderPortalUsers() {
+  const listEl = document.getElementById('pu-access-list');
+  if (!listEl) return;
+
+  // Count by category
+  const admins = allPortalUsers.filter(u => u.role === 'admin');
+  const spocs  = allPortalUsers.filter(u => u.role === 'partner' && u.is_poc === true);
+  const sales  = allPortalUsers.filter(u => u.role === 'partner' && !u.is_poc);
+
+  // Update chips
+  const safe = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  safe('pu-count-admin', admins.length);
+  safe('pu-count-poc',   spocs.length);
+  safe('pu-count-sales', sales.length);
+  safe('pu-count-total', allPortalUsers.length);
+
+  if (!allPortalUsers.length) {
+    listEl.innerHTML = '<div style="text-align:center;padding:20px;color:#94A3B8;font-size:12px">No users found.</div>';
+    return;
+  }
+
+  // Group: Admins, then SPOCs, then Sales
+  const groups = [
+    { label: 'Admin', color: '#1B2B6B', bg: '#EFF6FF', border: '#BFDBFE', users: admins },
+    { label: 'Partner SPOC', color: '#7C3AED', bg: '#F5F3FF', border: '#DDD6FE', users: spocs },
+    { label: 'Partner Sales', color: '#059669', bg: '#F0FDF4', border: '#BBF7D0', users: sales },
+  ];
+
+  listEl.innerHTML = groups.map(g => {
+    if (!g.users.length) return '';
+    const rows = g.users.map(u => {
+      const partner = partnerMap[u.partner_id] || {};
+      const partnerName = partner.name || u.partner_id || '—';
+      const displayName = u.full_name || u.email || u.id;
+      const joinDate = u.created_at ? new Date(u.created_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) : '—';
+      return `<div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid #F1F5F9;flex-wrap:wrap">
+        <!-- Avatar -->
+        <div style="width:34px;height:34px;border-radius:8px;background:${g.color};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0">
+          ${esc(displayName.charAt(0).toUpperCase())}
+        </div>
+        <!-- Details -->
+        <div style="flex:1;min-width:140px">
+          <div style="font-size:13px;font-weight:700;color:#1B2B6B">${esc(displayName)}</div>
+          <div style="font-size:11px;color:#94A3B8">${esc(u.email||'—')}${u.role==='partner'?' · '+esc(partnerName):''}</div>
+        </div>
+        <div style="font-size:10.5px;color:#CBD5E1;white-space:nowrap">Since ${joinDate}</div>
+        <!-- Revoke button -->
+        <button onclick="revokeAccess('${u.id}','${esc(displayName)}','${esc(u.email||'')}')"
+          style="background:#FEF2F2;color:#DC2626;border:1px solid #FECACA;border-radius:7px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0"
+          title="Remove portal access">
+          ✕ Revoke
+        </button>
+      </div>`;
+    }).join('');
+
+    return `<div style="margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:${g.bg};border:1px solid ${g.border};border-radius:8px 8px 0 0">
+        <span style="font-size:11px;font-weight:800;color:${g.color};text-transform:uppercase;letter-spacing:.5px">${g.label}</span>
+        <span style="font-size:11px;color:${g.color};opacity:.7">(${g.users.length})</span>
+      </div>
+      <div style="border:1px solid #F1F5F9;border-top:none;border-radius:0 0 8px 8px;background:#fff">${rows}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── REVOKE ACCESS ──────────────────────────────────────────────────
+async function revokeAccess(userId, displayName, email) {
+  if (!confirm('Revoke portal access for ' + displayName + ' (' + email + ')?\n\nThis will remove their role and they will no longer be able to sign in.')) return;
+
+  // Clear role, partner_id, is_poc from their profile
+  const { error } = await sb
+    .from('profiles')
+    .update({ role: null, partner_id: null, is_poc: false })
+    .eq('id', userId);
+
+  if (error) {
+    toast('Error revoking access: ' + error.message, 'error');
+    return;
+  }
+
+  // Also mark the signup record as revoked if one exists
+  await sb
+    .from('partner_signups')
+    .update({ status: 'rejected', reject_reason: 'Access revoked by admin', rejected_at: new Date().toISOString() })
+    .eq('email', email)
+    .eq('status', 'approved');
+
+  toast('Access revoked for ' + displayName, '');
+
+  // Remove from local list and re-render
+  allPortalUsers = allPortalUsers.filter(u => u.id !== userId);
+  renderPortalUsers();
+
+  // Also refresh signups list counts
+  const idx = allSignups.findIndex(s => s.email === email);
+  if (idx >= 0) { allSignups[idx].status = 'rejected'; }
+  updateSignupCounts(); filterSignups(); updateSignupBadge();
+}
 
 </script>
 </body>
