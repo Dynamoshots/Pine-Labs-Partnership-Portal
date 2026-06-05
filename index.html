@@ -1496,6 +1496,7 @@ function adminTab(id, el) {
   if (id==='email') buildEmailTab();
   if (id==='leaderboard') loadLeaderboard();
   if (id==='openint') loadOIData();
+  if (id==='signups') loadSignups();
 }
 
 // ── OVERVIEW ─────────────────────────────────────
@@ -1603,6 +1604,7 @@ async function loadOverview() {
     </div>`;
   }).join('');
   document.getElementById('recent-leads').innerHTML = recentRows || '<div style="color:#94A3B8;font-size:12px">No leads yet</div>';
+  loadSignupCount();
 }
 
 // ── ALL LEADS ─────────────────────────────────────
@@ -1864,6 +1866,22 @@ function openLeadModal(id) {
   document.getElementById('ld-updater-name').value = currentProfile?.full_name||'';
   onLdStatusChange();
   document.getElementById('modal-lead-detail').classList.add('open');
+  // Add click-to-copy on Phone, POS ID, Lead ID fields
+  setTimeout(() => {
+    document.querySelectorAll('#ld-details > div').forEach(div => {
+      const label = div.querySelector('div:first-child')?.textContent?.trim();
+      const valDiv = div.querySelector('div:last-child');
+      if (!valDiv || !label) return;
+      const val = valDiv.textContent?.trim();
+      if (!val || val === '—') return;
+      if (['PHONE','POS ID','LEAD ID'].includes(label)) {
+        valDiv.style.cursor = 'pointer';
+        valDiv.title = 'Click to copy';
+        valDiv.onclick = () => copyToClipboard(val, label);
+        valDiv.innerHTML = '<span style="font-family:monospace;font-size:12px">' + valDiv.textContent + '</span> <span style="color:#94A3B8;font-size:10px">📋</span>';
+      }
+    });
+  }, 50);
 }
 
 function onLdStatusChange() {
@@ -2629,37 +2647,9 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// ── IMPROVED LEAD MODAL with copy buttons ────────────────────────────
-const _origOpenLeadModal = openLeadModal;
-function openLeadModal(id) {
-  _origOpenLeadModal(id);
-  // After modal opens, enhance the field display with copy buttons
-  setTimeout(() => {
-    const l = allLeads.find(x=>x.id===id);
-    if (!l) return;
-    // Add copy icon to phone
-    document.querySelectorAll('#ld-details > div').forEach(div => {
-      const label = div.querySelector('div:first-child')?.textContent?.trim();
-      const valDiv = div.querySelector('div:last-child');
-      if (!valDiv || !label) return;
-      const val = valDiv.textContent?.trim();
-      if (!val || val==='—') return;
-      if (['PHONE','POS ID','LEAD ID'].includes(label)) {
-        valDiv.style.cursor = 'pointer';
-        valDiv.title = 'Click to copy';
-        valDiv.onclick = () => copyToClipboard(val, label);
-        valDiv.innerHTML = `<span style="font-family:'JetBrains Mono',monospace;font-size:12px">${valDiv.textContent}</span> <span style="color:#94A3B8;font-size:10px">📋</span>`;
-      }
-    });
-  }, 50);
-}
+// copy-button logic merged into original openLeadModal below
 
-// ── PARTNER PORTAL: LEAD STATUS COLOR TABLE ──────────────────────────
-// Add visual color cue to status column in partner leads table
-const _origRenderPartnerLeads = renderPartnerLeads;
-function renderPartnerLeads() {
-  _origRenderPartnerLeads();
-}
+// renderPartnerLeads override removed (was a no-op)
 
 // ── SMART SEARCH AUTO-COMPLETE HINTS ─────────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
@@ -3209,12 +3199,7 @@ async function rejectSignup(id, email, companyName) {
   toast('Signup rejected', '');
 }
 
-// ── PATCH adminTab TO LOAD SIGNUPS ───────────────
-const _origAdminTab = adminTab;
-function adminTab(id, el) {
-  _origAdminTab(id, el);
-  if (id === 'signups') loadSignups();
-}
+// adminTab signups patch merged into original
 
 // ── LOAD SIGNUP COUNT ON ADMIN LOAD ──────────────
 async function loadSignupCount() {
@@ -3227,12 +3212,7 @@ async function loadSignupCount() {
   }
 }
 
-// Extend admin session load to fetch signup count
-const _origLoadOverview = loadOverview;
-async function loadOverview() {
-  await _origLoadOverview();
-  loadSignupCount();
-}
+// loadOverview signup count patch merged into original
 
 
 </script>
