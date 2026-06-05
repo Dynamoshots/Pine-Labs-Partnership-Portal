@@ -1330,11 +1330,28 @@ async function loadOverview() {
 // ── ALL LEADS ─────────────────────────────────────
 async function loadLeads() {
   document.getElementById('leads-tbody').innerHTML = '<tr><td colspan="9" class="loading"><div class="spinner"></div>Loading…</td></tr>';
-  const {data, error} = await sb.from('leads').select('*').order('created_at',{ascending:false});
-  if (error) { document.getElementById('leads-tbody').innerHTML = `<tr><td colspan="9" style="padding:20px;text-align:center;color:#DC2626">${error.message}</td></tr>`; return; }
-  allLeads = data || [];
+  // Paginate through ALL rows — Supabase returns max 1000 per request
+  let allRows = [];
+  let from = 0;
+  const batchSize = 1000;
+  while (true) {
+    const {data, error, count} = await sb.from('leads')
+      .select('*', {count: 'exact'})
+      .order('created_at', {ascending: false})
+      .range(from, from + batchSize - 1);
+    if (error) {
+      document.getElementById('leads-tbody').innerHTML = `<tr><td colspan="9" style="padding:20px;text-align:center;color:#DC2626">${error.message}</td></tr>`;
+      return;
+    }
+    if (!data || data.length === 0) break;
+    allRows = allRows.concat(data);
+    if (data.length < batchSize) break; // last page
+    from += batchSize;
+  }
+  allLeads = allRows;
   populateStateFilter();
   applyFilters();
+  updateTabLeadsCount();
 }
 
 function populateAdminFilters() {
@@ -1359,18 +1376,28 @@ function populateStateFilter() {
 }
 
 function applyFilters() {
-  const q   = document.getElementById('f-search').value.toLowerCase();
-  const par = document.getElementById('f-partner').value;
-  const sta = document.getElementById('f-status').value;
-  const st  = document.getElementById('f-state').value;
-  filteredLeads = allLeads.filter(l =>
-    (!q   || (l.merchant||'').toLowerCase().includes(q) || (l.city||'').toLowerCase().includes(q)) &&
-    (!par || l.partner_id === par) &&
-    (!sta || l.status === sta) &&
-    (!st  || l.state === st)
-  );
+  if (nlSearchActive) return; // NL search controls filteredLeads directly
+  const q    = document.getElementById('f-search').value.toLowerCase();
+  const par  = document.getElementById('f-partner').value;
+  const sta  = document.getElementById('f-status').value;
+  const st   = document.getElementById('f-state').value;
+  const from = document.getElementById('f-date-from')?.value || '';
+  const to   = document.getElementById('f-date-to')?.value || '';
+  filteredLeads = allLeads.filter(l => {
+    if (q   && !(l.merchant||'').toLowerCase().includes(q) && !(l.city||'').toLowerCase().includes(q) && !(l.contact||'').toLowerCase().includes(q)) return false;
+    if (par && l.partner_id !== par) return false;
+    if (sta && l.status !== sta) return false;
+    if (st  && l.state !== st) return false;
+    if (from || to) {
+      const d = l.created_at ? l.created_at.slice(0,10) : '';
+      if (from && d < from) return false;
+      if (to   && d > to)   return false;
+    }
+    return true;
+  });
   currentPage = 1;
   renderLeadsTable();
+  updateQuickStats();
 }
 
 
@@ -1776,6 +1803,8 @@ async function submitLead() {
   const city     = document.getElementById('nl-city').value.trim();
   const state    = document.getElementById('nl-state').value;
   if (!merchant||!contact||!phone||!city||!state) { toast('Please fill in all required fields','error'); return; }
+  const _submitBtn = document.querySelector('#view-partner .btn-primary[onclick="submitLead()"]');
+  if (_submitBtn) { _submitBtn.textContent='⏳ Submitting…'; _submitBtn.disabled=true; }
   const idType   = document.getElementById('nl-id-type').value;
   const idNumber = document.getElementById('nl-id-number').value.trim();
   const {error} = await sb.from('leads').insert({
@@ -1792,12 +1821,14 @@ async function submitLead() {
     lead_source:   'Partner App',
     ic:            (function(){var pin=document.getElementById('nl-pincode').value.trim();var idx=PINCODE_SH[parseInt(pin)];return idx!==undefined?SH_NAMES[idx]:''})()
   });
-  if (error) { toast('Error: '+error.message,'error'); return; }
+  if (error) { toast('Error: '+error.message,'error'); if (_submitBtn) { _submitBtn.textContent='Submit Lead'; _submitBtn.disabled=false; } return; }
   toast('Lead submitted successfully! ✓','success');
   ['nl-merchant','nl-contact','nl-phone','nl-city','nl-pincode','nl-address','nl-remarks','nl-id-number'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('nl-state').value='';
   document.getElementById('nl-id-type').value='';
   document.getElementById('nl-id-input-wrap').style.display='none';
+  document.getElementById('nl-sh-display').textContent='';
+  if (_submitBtn) { _submitBtn.textContent='Submit Lead'; _submitBtn.disabled=false; }
   loadPartnerLeads();
 }
 
@@ -2160,6 +2191,7 @@ function runNLSearch() {
   filteredLeads = results;
   currentPage = 1;
   renderLeadsTable();
+  updateQuickStats();
 
   const interp = document.getElementById('nl-interpretation');
   if (tags.length) {
@@ -2180,7 +2212,7 @@ function clearNLSearch() {
   document.getElementById('regular-filters').style.opacity = '1';
   document.getElementById('regular-filters').style.pointerEvents = 'auto';
   nlSearchActive = false;
-  applyFilters();
+  applyFilters(); // this now includes updateQuickStats
 }
 
 // ── MODALS ────────────────────────────────────────
@@ -2256,23 +2288,7 @@ function printLeads() {
   win.document.close();
 }
 
-// ── DATE RANGE FILTER (extends applyFilters) ──────────────────────────
-const _origApplyFilters = applyFilters;
-function applyFilters() {
-  _origApplyFilters();
-  // Extra date range filter on top
-  const from = document.getElementById('f-date-from')?.value;
-  const to   = document.getElementById('f-date-to')?.value;
-  if (from || to) {
-    filteredLeads = filteredLeads.filter(l => {
-      const d = l.created_at ? l.created_at.slice(0,10) : '';
-      if (from && d < from) return false;
-      if (to   && d > to)   return false;
-      return true;
-    });
-  }
-  updateQuickStats();
-}
+// Date range filter merged into applyFilters below
 
 // ── QUICK STATS BAR ──────────────────────────────────────────────────
 function updateQuickStats() {
@@ -2394,34 +2410,14 @@ setTimeout(() => {
   if (expBtn) expBtn.title = 'Export to CSV (Ctrl+E)';
 }, 500);
 
-// ── LEADS TABLE: Show row count in header ─────────────────────────────
-const _origRenderLeadsTable = renderLeadsTable;
-function renderLeadsTable() {
-  _origRenderLeadsTable();
-  updateQuickStats();
-}
+// renderLeadsTable override removed — updateQuickStats now in applyFilters
 
-// ── PARTNER PORTAL: Animated submit feedback ──────────────────────────
-const _origSubmitLead = submitLead;
-async function submitLead() {
-  const btn = document.querySelector('#view-partner .btn-primary[onclick="submitLead()"]');
-  if (btn) {
-    const origText = btn.textContent;
-    btn.textContent = '⏳ Submitting…';
-    btn.disabled = true;
-    await _origSubmitLead();
-    btn.textContent = origText;
-    btn.disabled = false;
-  } else {
-    await _origSubmitLead();
-  }
-}
+// submitLead wrapper removed — animation handled inline
 
 
 
-// ── SESSION LEAD COUNTER ──────────────────────────────────────────────
+// Session lead counter
 let sessionLeadCount = 0;
-const _baseSubmitLead = submitLead;
 
 // ── CLEAR ALL FILTERS ─────────────────────────────────────────────────
 function clearAllFilters() {
@@ -2448,12 +2444,7 @@ function updateTabLeadsCount() {
   if (el) el.textContent = allLeads.length > 0 ? allLeads.length : '';
 }
 
-// Override loadLeads to update tab count
-const __origLoadLeads = loadLeads;
-async function loadLeads() {
-  await __origLoadLeads();
-  updateTabLeadsCount();
-}
+// loadLeads override removed — updateTabLeadsCount is now inline
 
 </script>
 </body>
